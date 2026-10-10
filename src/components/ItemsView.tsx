@@ -21,7 +21,10 @@ interface Props {
   onSort?: (s: Sort) => void;
 }
 
-const ESTIMATE: Record<View, number> = { kartu: 240, daftar: 112, tabel: 68 };
+// Perkiraan tinggi baris (px) sebelum diukur; diambil dari pengukuran nyata agar total tinggi
+// daftar tidak melompat saat baris-baris selesai diukur. [layar lebar, layar sempit (<600px)]
+const ESTIMATE: Record<View, [number, number]> = { kartu: [214, 190], daftar: [105, 165], tabel: [61, 71] };
+const estimate = (v: View) => ESTIMATE[v][window.innerWidth < 600 ? 1 : 0];
 const MIN_CARD = 260;
 const GAP = 12;
 const PAGE_JUMP = 8;
@@ -50,7 +53,7 @@ export function ItemsView({ entries, view, sort, onSort }: Props) {
 
   const virt = useWindowVirtualizer({
     count: rowCount,
-    estimateSize: () => ESTIMATE[view],
+    estimateSize: () => estimate(view),
     overscan: 6,
     scrollMargin: margin,
   });

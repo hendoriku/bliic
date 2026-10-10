@@ -22,6 +22,9 @@
   :root { --bg: #0f1117; --surface: #181b25; --text: #eceef5; --muted: #98a2b3; --line: #2a2f3d; --brand: #5b8cff; --brand-text: #0b1020; --ok: #4ade80; --warn: #fbbf24; --chip: #232a40; }
 }
 * { box-sizing: border-box; }
+/* Sisihkan ruang scrollbar di semua tab agar konten tidak bergeser saat pindah ke tab yang panjang (Katalog). */
+html { scrollbar-gutter: stable; }
+@supports not (scrollbar-gutter: stable) { html { overflow-y: scroll; } }
 body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 var(--font); }
 button, input, select, textarea { font-family: inherit; } /* kontrol form tidak mewarisi font secara bawaan */
 .app { max-width: 1100px; margin: 0 auto; padding: 0 16px 48px; }
