@@ -54,6 +54,7 @@ export function App() {
     <div className="app">
       <header className="top">
         <h1>Bli.ic <span>by Babelii</span></h1>
+        <p className="subtitle">Internet Package Calculator</p>
         <nav className="tabs" role="tablist">
           <button role="tab" aria-selected={tab === "katalog"} onClick={() => setTab("katalog")}>Katalog</button>
           <button role="tab" aria-selected={tab === "rekomendasi"} onClick={() => setTab("rekomendasi")}>Rekomendasi</button>
