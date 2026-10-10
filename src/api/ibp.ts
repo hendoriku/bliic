@@ -76,9 +76,76 @@ export function parseIbp(json: unknown): IbpResult {
   return { items: list.map(normalizeItem).filter((i): i is IbpItem => i !== null), extra };
 }
 
-/** Ambil dari jaringan dan simpan ke cache. */
+const MAX_PAGES = 200; // pengaman agar tidak berputar tanpa akhir
+
+const obj = (v: unknown): Record<string, unknown> => (v && typeof v === "object" ? (v as Record<string, unknown>) : {});
+const asInt = (v: unknown): number | null => {
+  const n = num(v);
+  return n !== null && Number.isInteger(n) ? n : null;
+};
+
+/** Tautan halaman berikutnya (gaya Laravel: links.next / next_page_url), bila ada. */
+function nextUrl(root: Record<string, unknown>): string | null {
+  const candidates = [obj(root.links).next, root.next_page_url, obj(root.meta).next_page_url, root.next];
+  const found = candidates.find((c) => typeof c === "string" && c !== "");
+  return typeof found === "string" ? found : null;
+}
+
+/** Nomor halaman terakhir (meta.last_page / last_page), bila API memakainya. */
+function lastPage(root: Record<string, unknown>): number | null {
+  const meta = obj(root.meta);
+  return asInt(meta.last_page) ?? asInt(root.last_page) ?? asInt(obj(root.pagination).last_page);
+}
+
+function currentPage(root: Record<string, unknown>): number {
+  return asInt(obj(root.meta).current_page) ?? asInt(root.current_page) ?? asInt(obj(root.pagination).current_page) ?? 1;
+}
+
+/**
+ * Mengambil seluruh halaman: mengikuti tautan "next" bila ada, atau menelusuri
+ * ?page=2..last_page. Hasil digabung menjadi satu respons ({ ...halaman1, data: semua }).
+ */
+export async function fetchAllPages(client: ApiClient, path = IBP_PATH): Promise<unknown> {
+  const first = await client.getJson(path);
+  const root = obj(first);
+  if (!Array.isArray(root.data)) return first; // bukan bentuk berhalaman
+  const all: unknown[] = [...root.data];
+
+  let pages = 1;
+  let next = nextUrl(root);
+  if (next) {
+    while (next && pages < MAX_PAGES) {
+      const page = obj(await client.getJson(next));
+      if (!Array.isArray(page.data) || page.data.length === 0) break;
+      all.push(...page.data);
+      pages++;
+      next = nextUrl(page);
+    }
+  } else {
+    const last = lastPage(root);
+    for (let n = currentPage(root) + 1; last !== null && n <= last && pages < MAX_PAGES; n++) {
+      const page = obj(await client.getJson(path, { page: n }));
+      if (!Array.isArray(page.data)) break;
+      all.push(...page.data);
+      pages++;
+    }
+  }
+
+  // Hilangkan duplikat bila ada tumpang tindih antarhalaman.
+  const seen = new Set<string>();
+  const data = all.filter((r) => {
+    const code = str(obj(r).code);
+    if (!code) return true;
+    if (seen.has(code)) return false;
+    seen.add(code);
+    return true;
+  });
+  return { ...root, data, _pages: pages };
+}
+
+/** Ambil semua halaman dari jaringan dan simpan ke cache. */
 export async function fetchIbp(client: ApiClient): Promise<IbpResult> {
-  const json = await client.getJson(IBP_PATH);
+  const json = await fetchAllPages(client);
   writeCache(json);
   return parseIbp(json);
 }

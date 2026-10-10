@@ -1,7 +1,7 @@
 // Cache respons API di localStorage (stale-while-revalidate).
 // Semua akses dibungkus try/catch: storage bisa kosong/diblokir (mode privat, dll).
 
-export const CACHE_KEY = "bliic:ibp:v1";
+export const CACHE_KEY = "bliic:ibp:v2";
 export const CACHE_TTL_MS = 5 * 60 * 1000; // dianggap segar selama 5 menit
 
 export interface Cached {

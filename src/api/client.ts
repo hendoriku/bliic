@@ -45,9 +45,17 @@ export class ApiClient {
     this.fetchImpl = opts.fetchImpl ?? ((input, init) => fetch(input, init));
   }
 
+  /** Path relatif terhadap baseUrl, atau URL absolut yang harus satu origin (mencegah mengikuti tautan ke host lain). */
+  private resolve(path: string): URL {
+    if (!/^https?:\/\//i.test(path)) return new URL(this.baseUrl + path);
+    const url = new URL(path);
+    if (url.origin !== new URL(this.baseUrl).origin) throw new ApiError(`URL di luar origin API ditolak: ${path}`);
+    return url;
+  }
+
   /** GET tanpa interpretasi skema: berguna untuk menyelidiki respons asli. */
   async getRaw(path: string, query?: Record<string, string | number>): Promise<RawResponse> {
-    const url = new URL(this.baseUrl + path);
+    const url = this.resolve(path);
     for (const [k, v] of Object.entries(query ?? {})) url.searchParams.set(k, String(v));
 
     let lastError: unknown;

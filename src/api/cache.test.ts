@@ -16,7 +16,7 @@ test("tulis lalu baca cache", () => {
 test("cache rusak atau kosong menghasilkan null", () => {
   const s = memory();
   assert.equal(readCache(s), null);
-  s.setItem("bliic:ibp:v1", "{bukan json");
+  s.setItem("bliic:ibp:v2", "{bukan json");
   assert.equal(readCache(s), null);
 });
 
