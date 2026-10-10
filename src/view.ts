@@ -4,7 +4,7 @@ import type { DetailKey } from "./presentation/details.ts";
 export const VIEWS = ["kartu", "daftar", "tabel"] as const;
 export type View = (typeof VIEWS)[number];
 export const VIEW_LABEL: Record<View, string> = { kartu: "Kartu", daftar: "Daftar", tabel: "Tabel" };
-export const VIEW_STORAGE_KEY = "bliic:view";
+export const VIEW_STORAGE_KEY = "bliic:view:v2";
 
 /** Satu paket yang akan ditampilkan beserta hiasannya; dipakai bersama oleh semua tab dan semua mode tampilan. */
 export interface Entry {

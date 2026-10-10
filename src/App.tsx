@@ -25,7 +25,7 @@ export function App() {
   const [load, setLoad] = useState<Load>({ kind: "loading" });
   const [tab, setTab] = useState<Tab>("katalog");
   // Pilihan tampilan dipakai bersama oleh semua tab dan diingat antar kunjungan.
-  const [view, setView] = usePersistentState<View>(VIEW_STORAGE_KEY, "kartu", VIEWS);
+  const [view, setView] = usePersistentState<View>(VIEW_STORAGE_KEY, "tabel", VIEWS);
 
   // Stale-while-revalidate: tampilkan cache dulu, segarkan di latar bila sudah kedaluwarsa (atau dipaksa).
   const reload = (force = false) => {
