@@ -1,29 +1,49 @@
 import { useEffect, useMemo, useState } from "react";
 import { ApiClient } from "./api/client.ts";
-import { fetchIbp, type IbpItem, type IbpResult } from "./api/ibp.ts";
+import { isFresh, readCache } from "./api/cache.ts";
+import { fetchIbp, parseIbp, type IbpItem, type IbpResult } from "./api/ibp.ts";
 import { catalogueLabel, days, gb, rupiah } from "./format.ts";
 import { recommend, unitCost, type Need } from "./recommend.ts";
+import { Wizard } from "./Wizard.tsx";
 
 const client = new ApiClient({
   baseUrl: import.meta.env.VITE_API_BASE_URL ?? "https://babelii.diofis.net/public-api/v1",
   retries: 1,
 });
 
-type Load = { kind: "loading" } | { kind: "ok"; data: IbpResult } | { kind: "error"; message: string };
-type Tab = "katalog" | "rekomendasi";
+type Load =
+  | { kind: "loading" }
+  | { kind: "ok"; data: IbpResult; at: number; refreshing: boolean; notice?: string }
+  | { kind: "error"; message: string };
+type Tab = "katalog" | "rekomendasi" | "bantu";
 type Sort = "termurah" | "hemat" | "kuota";
 
 export function App() {
   const [load, setLoad] = useState<Load>({ kind: "loading" });
   const [tab, setTab] = useState<Tab>("katalog");
 
-  const reload = () => {
-    setLoad({ kind: "loading" });
+  // Stale-while-revalidate: tampilkan cache dulu, segarkan di latar bila sudah kedaluwarsa (atau dipaksa).
+  const reload = (force = false) => {
+    const cached = readCache();
+    const shown = cached ? parseIbp(cached.json) : null;
+    if (cached && shown && shown.items.length > 0) {
+      const fresh = isFresh(cached) && !force;
+      setLoad({ kind: "ok", data: shown, at: cached.at, refreshing: !fresh });
+      if (fresh) return;
+    } else {
+      setLoad({ kind: "loading" });
+    }
     fetchIbp(client)
-      .then((data) => setLoad({ kind: "ok", data }))
-      .catch((err) => setLoad({ kind: "error", message: String(err) }));
+      .then((data) => setLoad({ kind: "ok", data, at: Date.now(), refreshing: false }))
+      .catch((err) =>
+        setLoad((cur) =>
+          cur.kind === "ok"
+            ? { ...cur, refreshing: false, notice: "Gagal menyegarkan, menampilkan data tersimpan." }
+            : { kind: "error", message: String(err) },
+        ),
+      );
   };
-  useEffect(reload, []);
+  useEffect(() => reload(), []);
 
   return (
     <div className="app">
@@ -31,6 +51,7 @@ export function App() {
         <h1>Bli.ic <span>by Babelii</span></h1>
         <nav className="tabs" role="tablist">
           <button role="tab" aria-selected={tab === "katalog"} onClick={() => setTab("katalog")}>Katalog</button>
+          <button role="tab" aria-selected={tab === "bantu"} onClick={() => setTab("bantu")}>Bantu Pilih</button>
           <button role="tab" aria-selected={tab === "rekomendasi"} onClick={() => setTab("rekomendasi")}>Rekomendasi</button>
         </nav>
       </header>
@@ -41,12 +62,19 @@ export function App() {
           <div className="state error" role="alert">
             <p>Gagal memuat data paket.</p>
             <small>{load.message}</small>
-            <button onClick={reload}>Coba lagi</button>
+            <button onClick={() => reload(true)}>Coba lagi</button>
           </div>
         )}
         {load.kind === "ok" && (
           <>
-            {tab === "katalog" ? <Catalogue items={load.data.items} /> : <Recommend items={load.data.items} />}
+            {tab === "katalog" && <Catalogue items={load.data.items} />}
+            {tab === "bantu" && <Wizard items={load.data.items} />}
+            {tab === "rekomendasi" && <Recommend items={load.data.items} />}
+            <p className="updated">
+              {load.refreshing ? "Menyegarkan data…" : `Data diperbarui ${new Date(load.at).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })}`}
+              {load.notice && <> · <span className="warn">{load.notice}</span></>}
+              {" "}<button className="link" disabled={load.refreshing} onClick={() => reload(true)}>Segarkan</button>
+            </p>
             <details className="debug">
               <summary>Info teknis ({load.data.items.length} paket)</summary>
               <pre>{JSON.stringify(load.data.extra, null, 2)}</pre>

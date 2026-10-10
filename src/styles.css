@@ -45,3 +45,28 @@ dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
 .state { text-align: center; color: var(--muted); padding: 32px 8px; }
 .state.error { color: var(--warn); } .state button { margin-top: 8px; padding: 8px 16px; }
 .debug { margin-top: 28px; color: var(--muted); font-size: 12px; } .debug pre { overflow: auto; background: var(--surface); padding: 10px; border-radius: 8px; }
+.updated { margin: 20px 0 0; font-size: 12px; color: var(--muted); }
+.updated .warn { color: var(--warn); }
+.link { background: none; border: 0; padding: 0; color: var(--brand); font: inherit; cursor: pointer; text-decoration: underline; }
+.link:disabled { opacity: .5; cursor: default; }
+.wiz { max-width: 560px; margin: 0 auto; }
+.progress { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.progress div { height: 100%; background: var(--brand); transition: width .25s; }
+.step-no { color: var(--muted); font-size: 13px; margin: 10px 0 0; }
+.q { font-size: 22px; line-height: 1.25; margin: 6px 0 16px; }
+.opts { display: grid; gap: 10px; }
+.opt { display: flex; justify-content: space-between; align-items: center; gap: 8px; text-align: left; padding: 16px; font: inherit; font-size: 16px; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; cursor: pointer; }
+.opt:hover, .opt:focus-visible { border-color: var(--brand); outline: none; }
+.opt.picked { border-color: var(--brand); background: var(--chip); }
+.opt small { color: var(--muted); }
+.opt.unsure { border-style: dashed; color: var(--muted); }
+.back { margin-top: 16px; }
+.summary { color: var(--muted); font-size: 13px; margin: -8px 0 14px; }
+.wiz-grid { grid-template-columns: 1fr; }
+.card.result .tag { align-self: flex-start; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+.tag.main { background: var(--brand); color: var(--brand-text); }
+.tag.alt { background: var(--chip); color: var(--ok); }
+.card.result.main { border-color: var(--brand); border-width: 2px; }
+.rate { display: block; color: var(--muted); font-size: 12px; }
+.wiz-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
+.btn.ghost { background: none; color: var(--brand); border: 1px solid var(--brand); cursor: pointer; font: inherit; font-weight: 600; }

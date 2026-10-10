@@ -5,7 +5,7 @@
   "scripts": {
     "smoke": "node scripts/smoke.ts",
     "typecheck": "tsc --noEmit",
-    "test": "node --test src/recommend.test.ts",
+    "test": "node --test src/recommend.test.ts src/wizard/engine.test.ts src/api/cache.test.ts",
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview"

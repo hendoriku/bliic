@@ -1,4 +1,5 @@
 import type { ApiClient } from "./client.ts";
+import { writeCache } from "./cache.ts";
 
 export const IBP_PATH = "/catalogue/ibp";
 
@@ -75,6 +76,9 @@ export function parseIbp(json: unknown): IbpResult {
   return { items: list.map(normalizeItem).filter((i): i is IbpItem => i !== null), extra };
 }
 
+/** Ambil dari jaringan dan simpan ke cache. */
 export async function fetchIbp(client: ApiClient): Promise<IbpResult> {
-  return parseIbp(await client.getJson(IBP_PATH));
+  const json = await client.getJson(IBP_PATH);
+  writeCache(json);
+  return parseIbp(json);
 }
