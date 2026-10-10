@@ -28,7 +28,7 @@ export function App() {
   return (
     <div className="app">
       <header className="top">
-        <h1>IBP <span>by Babelii</span></h1>
+        <h1>Bli.ic <span>by Babelii</span></h1>
         <nav className="tabs" role="tablist">
           <button role="tab" aria-selected={tab === "katalog"} onClick={() => setTab("katalog")}>Katalog</button>
           <button role="tab" aria-selected={tab === "rekomendasi"} onClick={() => setTab("rekomendasi")}>Rekomendasi</button>
