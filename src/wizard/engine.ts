@@ -2,6 +2,7 @@
 // Murni (tanpa React) agar mudah diuji.
 import type { IbpItem } from "../api/ibp.ts";
 
+export type Phone = "ya" | "tidak";
 export type Hotspot = "ya" | "tidak" | "tidak_yakin";
 export type Duration = "1" | "2-3" | "7+" | "tidak_yakin";
 export type Usage = "ringan" | "sedang" | "berat" | "tidak_yakin";
@@ -10,6 +11,8 @@ export type Priority = "cheapest" | "best_value" | "tidak_yakin";
 
 export interface Answers {
   operator: string;
+  /** Hafal / bersedia mengisi nomor HP? Menentukan boleh tidaknya menawarkan Paket Data. */
+  phone: Phone;
   hotspot: Hotspot;
   duration: Duration;
   usage: Usage;
@@ -31,6 +34,9 @@ export const MAX_BUDGET: Record<Budget, number> = {
   gt20: Infinity,
   tidak_yakin: Infinity,
 };
+
+/** Jenis katalog yang bisa dibeli tanpa nomor HP (voucher/kuota elektrik). Paket Data memerlukan nomor. */
+export const NO_NUMBER_CATALOGUES: readonly string[] = ["data-voucher", "electric-quota"];
 
 export interface WProduct {
   item: IbpItem;
@@ -69,6 +75,7 @@ export function getRecommendations(items: IbpItem[], a: Answers): Result {
     .map(toProduct)
     .filter((p) => {
       if (p.item.operator !== a.operator) return false;
+      if (a.phone === "tidak" && !NO_NUMBER_CATALOGUES.includes(p.item.catalogue)) return false;
       if (needHotspot && !p.allowHotspot) return false;
       if (range) {
         const d = p.item.validityDays;

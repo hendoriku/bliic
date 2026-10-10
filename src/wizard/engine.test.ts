@@ -8,6 +8,7 @@ const mk = (o: Record<string, unknown>) =>
 
 const base: Answers = {
   operator: "AXIS",
+  phone: "ya",
   hotspot: "tidak_yakin",
   duration: "tidak_yakin",
   usage: "tidak_yakin",
@@ -22,6 +23,24 @@ const items = [
   mk({ code: "W", name: "Paket Warnet", price: 4000, volume_gb: 1, validity_days: 1 }),
   mk({ code: "T", operator: "TELKOMSEL", price: 1000, volume_gb: 1, validity_days: 1 }),
 ];
+
+test("tanpa nomor HP: Paket Data tidak ditawarkan, hanya voucher & kuota elektrik", () => {
+  const mix = [
+    mk({ code: "PK", catalogue: "data-package", price: 3000, volume_gb: 5, validity_days: 1 }),
+    mk({ code: "DV", catalogue: "data-voucher", price: 5000, volume_gb: 5, validity_days: 1 }),
+    mk({ code: "EQ", catalogue: "electric-quota", price: 6000, volume_gb: 5, validity_days: 1 }),
+  ];
+  const no = getRecommendations(mix, { ...base, phone: "tidak" });
+  assert.equal(no.primary?.item.code, "DV");
+  assert.equal(no.secondary?.item.code, "EQ");
+  const yes = getRecommendations(mix, { ...base, phone: "ya" });
+  assert.equal(yes.primary?.item.code, "PK");
+});
+
+test("tanpa nomor HP dan hanya ada Paket Data -> tidak ada hasil", () => {
+  const only = [mk({ code: "PK", catalogue: "data-package", price: 3000, volume_gb: 5, validity_days: 1 })];
+  assert.equal(getRecommendations(only, { ...base, phone: "tidak" }).primary, null);
+});
 
 test("filter operator mutlak", () => {
   const r = getRecommendations(items, { ...base, operator: "TELKOMSEL" });
