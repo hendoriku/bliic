@@ -23,7 +23,7 @@ type Tab = "katalog" | "rekomendasi" | "bantu";
 
 export function App() {
   const [load, setLoad] = useState<Load>({ kind: "loading" });
-  const [tab, setTab] = useState<Tab>("katalog");
+  const [tab, setTab] = useState<Tab>("bantu");
   // Pilihan tampilan dipakai bersama oleh semua tab dan diingat antar kunjungan.
   const [view, setView] = usePersistentState<View>(VIEW_STORAGE_KEY, "tabel", VIEWS);
 
