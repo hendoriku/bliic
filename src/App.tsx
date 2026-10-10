@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ApiClient } from "./api/client.ts";
 import { isFresh, readCache } from "./api/cache.ts";
 import { fetchIbp, parseIbp, type IbpItem, type IbpResult } from "./api/ibp.ts";
-import { catalogueLabel, days, gb, rupiah } from "./format.ts";
+import { days, gb, rupiah } from "./format.ts";
 import { recommend, unitCost, type Need } from "./recommend.ts";
 import { Wizard } from "./Wizard.tsx";
 
@@ -91,20 +91,17 @@ function uniq(items: IbpItem[], pick: (i: IbpItem) => string): string[] {
 }
 
 function Catalogue({ items }: { items: IbpItem[] }) {
-  const [cat, setCat] = useState("");
   const [op, setOp] = useState("");
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<Sort>("termurah");
   const [onlyAvail, setOnlyAvail] = useState(true);
 
-  const cats = useMemo(() => uniq(items, (i) => i.catalogue), [items]);
   const ops = useMemo(() => uniq(items, (i) => i.operator), [items]);
 
   const shown = useMemo(() => {
     const needle = q.trim().toLowerCase();
     const list = items.filter(
       (i) =>
-        (!cat || i.catalogue === cat) &&
         (!op || i.operator === op) &&
         (!onlyAvail || i.available) &&
         (!needle || i.name.toLowerCase().includes(needle) || i.code.toLowerCase().includes(needle)),
@@ -114,16 +111,10 @@ function Catalogue({ items }: { items: IbpItem[] }) {
     if (sort === "hemat") list.sort((a, b) => (unitCost(a) ?? inf) - (unitCost(b) ?? inf) || a.price - b.price);
     if (sort === "kuota") list.sort((a, b) => (b.volumeGb ?? -1) - (a.volumeGb ?? -1));
     return list;
-  }, [items, cat, op, q, sort, onlyAvail]);
+  }, [items, op, q, sort, onlyAvail]);
 
   return (
     <section>
-      <div className="chips" role="group" aria-label="Jenis paket">
-        <button aria-pressed={cat === ""} onClick={() => setCat("")}>Semua</button>
-        {cats.map((c) => (
-          <button key={c} aria-pressed={cat === c} onClick={() => setCat(c)}>{catalogueLabel(c)}</button>
-        ))}
-      </div>
       <div className="filters">
         <input type="search" placeholder="Cari paket atau kode…" value={q} onChange={(e) => setQ(e.target.value)} />
         <select value={op} onChange={(e) => setOp(e.target.value)} aria-label="Operator">
@@ -154,7 +145,6 @@ function Card({ item: i, reason }: { item: IbpItem; reason?: string }) {
     <article className={`card${i.available ? "" : " off"}`}>
       <div className="meta">
         <span className="op">{i.operator}</span>
-        <span className="cat">{catalogueLabel(i.catalogue)}</span>
       </div>
       <h3>{i.name}</h3>
       <div className="badges">
@@ -184,20 +174,17 @@ function Recommend({ items }: { items: IbpItem[] }) {
   const [budget, setBudget] = useState("");
   const [minGb, setMinGb] = useState("");
   const [minDays, setMinDays] = useState("");
-  const [cat, setCat] = useState("");
   const [op, setOp] = useState("");
 
-  const cats = useMemo(() => uniq(items, (i) => i.catalogue), [items]);
   const ops = useMemo(() => uniq(items, (i) => i.operator), [items]);
 
   const need: Need = {
     budget: budget ? Number(budget) : undefined,
     minGb: minGb ? Number(minGb) : undefined,
     minDays: minDays ? Number(minDays) : undefined,
-    catalogue: cat || undefined,
     operator: op || undefined,
   };
-  const results = useMemo(() => recommend(items, need), [items, budget, minGb, minDays, cat, op]);
+  const results = useMemo(() => recommend(items, need), [items, budget, minGb, minDays, op]);
 
   return (
     <section>
@@ -210,12 +197,6 @@ function Recommend({ items }: { items: IbpItem[] }) {
         </label>
         <label>Masa aktif minimum (hari)
           <input inputMode="numeric" type="number" min="0" placeholder="mis. 30" value={minDays} onChange={(e) => setMinDays(e.target.value)} />
-        </label>
-        <label>Jenis paket
-          <select value={cat} onChange={(e) => setCat(e.target.value)}>
-            <option value="">Semua</option>
-            {cats.map((c) => <option key={c} value={c}>{catalogueLabel(c)}</option>)}
-          </select>
         </label>
         <label>Operator
           <select value={op} onChange={(e) => setOp(e.target.value)}>

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { IbpItem } from "./api/ibp.ts";
-import { catalogueLabel, days, gb, rupiah } from "./format.ts";
+import { days, gb, rupiah } from "./format.ts";
 import { compareBadge, getRecommendations, type Answers, type WProduct } from "./wizard/engine.ts";
 
 type Key = keyof Answers;
@@ -162,7 +162,6 @@ function ResultCard({ p, badge, tone }: { p: WProduct; badge: string; tone: "mai
       <span className={`tag ${tone}`}>{badge}</span>
       <div className="meta">
         <span className="op">{i.operator}</span>
-        <span className="cat">{catalogueLabel(i.catalogue)}</span>
       </div>
       <h3>{i.name}</h3>
       <dl>
