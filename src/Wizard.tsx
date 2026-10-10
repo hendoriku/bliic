@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import type { IbpItem } from "./api/ibp.ts";
-import { days, gb, rupiah } from "./format.ts";
-import { compareBadge, getRecommendations, type Answers, type WProduct } from "./wizard/engine.ts";
+import { PackageCard } from "./components/PackageCard.tsx";
+import { rupiah } from "./format.ts";
+import { compareBadge, getRecommendations, type Answers } from "./wizard/engine.ts";
 
 type Key = keyof Answers;
 interface Option { value: string; label: string; hint?: string; unsure?: boolean }
@@ -134,15 +135,11 @@ export function Wizard({ items }: { items: IbpItem[] }) {
       ) : (
         <ul className="grid wiz-grid">
           <li>
-            <ResultCard
-              p={r.primary}
-              badge={a.priority === "cheapest" ? "Paling Hemat Tunai" : "Paling Pas Dengan Kebutuhanmu"}
-              tone="main"
-            />
+            <PackageCard item={r.primary.item} rows={["kuota", "masa"]} showPricePerGb highlight={{ text: a.priority === "cheapest" ? "Paling Hemat Tunai" : "Paling Pas Dengan Kebutuhanmu", tone: "main" }} />
           </li>
           {r.secondary && (
             <li>
-              <ResultCard p={r.secondary} badge={compareBadge(r.primary, r.secondary, rupiah)} tone="alt" />
+              <PackageCard item={r.secondary.item} rows={["kuota", "masa"]} showPricePerGb highlight={{ text: compareBadge(r.primary, r.secondary, rupiah), tone: "alt" }} />
             </li>
           )}
         </ul>
@@ -152,33 +149,5 @@ export function Wizard({ items }: { items: IbpItem[] }) {
         <button className="btn ghost" onClick={reset}>Mulai lagi</button>
       </div>
     </section>
-  );
-}
-
-function ResultCard({ p, badge, tone }: { p: WProduct; badge: string; tone: "main" | "alt" }) {
-  const i = p.item;
-  return (
-    <article className={`card result ${tone}`}>
-      <span className={`tag ${tone}`}>{badge}</span>
-      <div className="meta">
-        <span className="op">{i.operator}</span>
-      </div>
-      <h3>{i.name}</h3>
-      <dl>
-        <div><dt>Total kuota</dt><dd>{gb(i.volumeGb)}</dd></div>
-        <div><dt>Masa aktif</dt><dd>{days(i.validityDays)}</dd></div>
-      </dl>
-      <div className="buy">
-        <div>
-          <strong>{rupiah(i.price)}</strong>
-          {p.ratePerGb !== null && <small className="rate">≈ {rupiah(p.ratePerGb)}/GB</small>}
-        </div>
-        {i.buyUrl ? (
-          <a className="btn" href={i.buyUrl} target="_blank" rel="noopener noreferrer">Beli</a>
-        ) : (
-          <span className="btn disabled">Beli</span>
-        )}
-      </div>
-    </article>
   );
 }

@@ -10,7 +10,7 @@ export interface Need {
 
 export interface Recommendation {
   item: IbpItem;
-  reason: string;
+  reason?: string;
 }
 
 /** Biaya per GB per hari: pakai nilai dari API, atau hitung sendiri bila datanya lengkap. */
@@ -34,16 +34,10 @@ export function recommend(items: IbpItem[], n: Need, limit = 5): Recommendation[
   const ok = items.filter((i) => matches(i, n));
   const costOf = (i: IbpItem) => unitCost(i) ?? Number.POSITIVE_INFINITY;
   ok.sort((a, b) => costOf(a) - costOf(b) || a.price - b.price);
-  return ok.slice(0, limit).map((item) => ({ item, reason: explain(item, ok[0] === item) }));
+  return ok.slice(0, limit).map((item) => ({ item, reason: explain(item, ok[0] === item) || undefined }));
 }
 
+/** Catatan di bawah kartu. Lencana (Smart Pick, Worth It) ditampilkan kartu itu sendiri, jadi tidak diulang di sini. */
 function explain(i: IbpItem, best: boolean): string {
-  const parts: string[] = [];
-  const c = unitCost(i);
-  if (best && c !== null) parts.push("Paling hemat per GB per hari di antara yang cocok");
-  else if (c !== null) parts.push(`±${Math.round(c)} per GB/hari`);
-  if (i.isSmartPick) parts.push("Smart Pick");
-  if (i.isWorthIt) parts.push("Worth It");
-  if (!parts.length) parts.push("Sesuai kriteria Anda");
-  return parts.join(" · ");
+  return best && unitCost(i) !== null ? "Paling hemat per GB per hari di antara yang cocok" : "";
 }

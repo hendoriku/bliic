@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ApiClient } from "./api/client.ts";
 import { isFresh, readCache } from "./api/cache.ts";
 import { fetchIbp, parseIbp, type IbpItem, type IbpResult } from "./api/ibp.ts";
-import { days, gb, rupiah } from "./format.ts";
+import { PackageCard } from "./components/PackageCard.tsx";
 import { recommend, unitCost, type Need } from "./recommend.ts";
 import { Wizard } from "./Wizard.tsx";
 
@@ -132,41 +132,10 @@ function Catalogue({ items }: { items: IbpItem[] }) {
       </div>
       <p className="count">{shown.length} paket</p>
       <ul className="grid">
-        {shown.map((i) => <li key={i.code}><Card item={i} /></li>)}
+        {shown.map((i) => <li key={i.code}><PackageCard item={i} /></li>)}
       </ul>
       {shown.length === 0 && <p className="state">Tidak ada paket yang cocok.</p>}
     </section>
-  );
-}
-
-function Card({ item: i, reason }: { item: IbpItem; reason?: string }) {
-  const rate = unitCost(i);
-  return (
-    <article className={`card${i.available ? "" : " off"}`}>
-      <div className="meta">
-        <span className="op">{i.operator}</span>
-      </div>
-      <h3>{i.name}</h3>
-      <div className="badges">
-        {i.isSmartPick && <span className="b smart">Smart Pick</span>}
-        {i.isWorthIt && <span className="b worth">Worth It</span>}
-        {i.badges.map((b) => <span key={b} className="b">{b}</span>)}
-      </div>
-      <dl>
-        <div><dt>Kuota</dt><dd>{gb(i.volumeGb)}</dd></div>
-        <div><dt>Masa aktif</dt><dd>{days(i.validityDays)}</dd></div>
-        {rate !== null && <div><dt>Per GB/hari</dt><dd>{rupiah(rate)}</dd></div>}
-      </dl>
-      {reason && <p className="reason">{reason}</p>}
-      <div className="buy">
-        <strong>{rupiah(i.price)}</strong>
-        {i.available && i.buyUrl ? (
-          <a className="btn" href={i.buyUrl} target="_blank" rel="noopener noreferrer">Beli</a>
-        ) : (
-          <span className="btn disabled">{i.available ? "Beli" : "Tidak tersedia"}</span>
-        )}
-      </div>
-    </article>
   );
 }
 
@@ -210,7 +179,7 @@ function Recommend({ items }: { items: IbpItem[] }) {
         <p className="state">Belum ada paket yang cocok. Coba longgarkan budget, kuota, atau masa aktif.</p>
       ) : (
         <ul className="grid">
-          {results.map((r) => <li key={r.item.code}><Card item={r.item} reason={r.reason} /></li>)}
+          {results.map((r) => <li key={r.item.code}><PackageCard item={r.item} note={r.reason} /></li>)}
         </ul>
       )}
     </section>
