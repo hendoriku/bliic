@@ -24,6 +24,14 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Font di-host satu origin dengan aplikasi (tanpa urusan CORS). Bila unduhan gagal,
+      # CSS otomatis memakai salinan di server Babelii sebagai cadangan.
+      - name: Download Captura font
+        run: |
+          mkdir -p public/fonts
+          curl -fsSL --retry 3 -o public/fonts/Captura-Regular.woff2 https://babelii.diofis.net/fonts/Captura-Regular.woff2 \
+            && ls -l public/fonts \
+            || echo "::warning::Gagal mengunduh font Captura; memakai cadangan dari server Babelii"
       - run: npm run build
         env:
           # Ganti ke "/" setelah memakai domain ibp.diofis.net

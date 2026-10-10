@@ -1,8 +1,12 @@
 /* Font global: Captura (hanya bobot Regular tersedia; tebal disintesis browser).
-   Dimuat dari server Babelii; jika gagal, tampil font sistem lalu berganti otomatis (swap). */
+   Sumber 1: salinan lokal yang diunduh workflow deploy ke public/fonts (satu origin, tanpa CORS).
+   Sumber 2: server Babelii (cadangan dan untuk pengembangan lokal).
+   Jika keduanya gagal tampil font sistem; swap otomatis begitu font siap. */
 @font-face {
   font-family: "Captura";
-  src: url("https://babelii.diofis.net/fonts/Captura-Regular.woff2") format("woff2");
+  src:
+    url("/fonts/Captura-Regular.woff2") format("woff2"),
+    url("https://babelii.diofis.net/fonts/Captura-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
