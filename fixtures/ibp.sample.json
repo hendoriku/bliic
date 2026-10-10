@@ -1,0 +1,2404 @@
+{
+ "data": [
+  {
+   "code": "AXDWUN1",
+   "name": "Axis Data Paket Warnet  Unlimited 1 Jam",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 4000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": null,
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=AXDWUN1"
+  },
+  {
+   "code": "BBL-DV-AXIS-7GB-2H-OK",
+   "name": "Act Vocer 7GB + Bonus Aigo 2 Hari",
+   "catalogue": "data-voucher",
+   "operator": "AXIS",
+   "price": 12000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 7,
+   "validity_days": 2,
+   "rate_per_gb_day": 857.14,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BBL-DV-AXIS-7GB-2H-OK"
+  },
+  {
+   "code": "MGS4",
+   "name": "Mini Axis 9GB + Bonus Aigo 3 Hari",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 15500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 9,
+   "validity_days": 3,
+   "rate_per_gb_day": 574.07,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=MGS4"
+  },
+  {
+   "code": "axisdataH5GB3D",
+   "name": "Axis Paket Internet Paket Harian 5GB 3Hari + Lokal",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 18000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 5,
+   "validity_days": 3,
+   "rate_per_gb_day": 1200,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=axisdataH5GB3D"
+  },
+  {
+   "code": "ADWUN48",
+   "name": "Axis Data Paket Warnet Unlimited 48 Jam",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 21000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": 2,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=ADWUN48"
+  },
+  {
+   "code": "ABGO7G14",
+   "name": "Axis Bronet GO 7GB 14hari",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 25500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 7,
+   "validity_days": 14,
+   "rate_per_gb_day": 260.2,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "mid",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=ABGO7G14"
+  },
+  {
+   "code": "AXM5",
+   "name": "Mini Axis 24GB + Bonus Aigo 5 Hari",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 27500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 24,
+   "validity_days": 5,
+   "rate_per_gb_day": 229.17,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=AXM5"
+  },
+  {
+   "code": "axisdataAIGOM6",
+   "name": "Axis Paket Internet AIGO Mini 4GB + Lokal 15hr",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 33500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 4,
+   "validity_days": 15,
+   "rate_per_gb_day": 558.33,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "mid",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=axisdataAIGOM6"
+  },
+  {
+   "code": "ABGO35G5",
+   "name": "Axis Bronet GO 35GB 5hari",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 37000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 35,
+   "validity_days": 5,
+   "rate_per_gb_day": 211.43,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=ABGO35G5"
+  },
+  {
+   "code": "VVANS5",
+   "name": "Axis Data Bronet 10 GB 30 Hari Sulawesi Ewako",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 44000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 10,
+   "validity_days": 30,
+   "rate_per_gb_day": 146.67,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VVANS5"
+  },
+  {
+   "code": "axisdataB25G14H",
+   "name": "Axis Paket Internet BRONET 25GB - 14 Hari",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 52000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 25,
+   "validity_days": 14,
+   "rate_per_gb_day": 148.57,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "mid",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=axisdataB25G14H"
+  },
+  {
+   "code": "AXD12H",
+   "name": "AXIS DATA BRONET 12GB 28 HARI",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 70500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 12,
+   "validity_days": 28,
+   "rate_per_gb_day": 209.82,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=AXD12H"
+  },
+  {
+   "code": "ABGO65GB",
+   "name": "Axis Bronet GO 65GB 28hari ",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 96000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 65,
+   "validity_days": 28,
+   "rate_per_gb_day": 52.75,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=ABGO65GB"
+  },
+  {
+   "code": "AXBR15H",
+   "name": "AXIS DATA BRONET 85GB + KUOTA LOKAL/60 Hr",
+   "catalogue": "data-package",
+   "operator": "AXIS",
+   "price": 179000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 85,
+   "validity_days": 60,
+   "rate_per_gb_day": 35.1,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "xlong",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=AXBR15H"
+  },
+  {
+   "code": "MC1N3",
+   "name": "1GB All Jaringan 3 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 8000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 1,
+   "validity_days": 3,
+   "rate_per_gb_day": 2666.67,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "s",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=MC1N3"
+  },
+  {
+   "code": "IFM5N2",
+   "name": "Freedom Mini 9GB 2 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 13000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 9,
+   "validity_days": 2,
+   "rate_per_gb_day": 722.22,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=IFM5N2"
+  },
+  {
+   "code": "VIFL3",
+   "name": "Voucher Freedom Mini KSMP 2.5GB 5 Hari",
+   "catalogue": "electric-quota",
+   "operator": "Indosat",
+   "price": 16000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 2.5,
+   "validity_days": 5,
+   "rate_per_gb_day": 1280,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "s",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VIFL3"
+  },
+  {
+   "code": "isatdataFIS8g",
+   "name": "Indosat Paket Internet Freedom Internet 8GB/3hr",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 19000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 8,
+   "validity_days": 3,
+   "rate_per_gb_day": 791.67,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=isatdataFIS8g"
+  },
+  {
+   "code": "IFM9N7",
+   "name": "Freedom Mini 13GB 7 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 25000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 13,
+   "validity_days": 7,
+   "rate_per_gb_day": 274.73,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=IFM9N7"
+  },
+  {
+   "code": "IFM15N7",
+   "name": "Freedom Mini 22GB 7 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 30000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 22,
+   "validity_days": 7,
+   "rate_per_gb_day": 194.81,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=IFM15N7"
+  },
+  {
+   "code": "isatma90hr",
+   "name": "Indosat Paket Internet Indosat Tambah Masa Aktif Kartu 90 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 36000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": 90,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": "xlong",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=isatma90hr"
+  },
+  {
+   "code": "FIBN11",
+   "name": "Freedom Internet 11GB 28 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 47000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 11,
+   "validity_days": 28,
+   "rate_per_gb_day": 152.6,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=FIBN11"
+  },
+  {
+   "code": "isatdataFI12GB",
+   "name": "Indosat Paket Internet Freedom Internet 12GB / 30 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 57500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 12,
+   "validity_days": 30,
+   "rate_per_gb_day": 159.72,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=isatdataFI12GB"
+  },
+  {
+   "code": "isatdatahifi75gb",
+   "name": "Indosat Paket Internet Data HiFi Air 75GB 30 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 70500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 75,
+   "validity_days": 30,
+   "rate_per_gb_day": 31.33,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=isatdatahifi75gb"
+  },
+  {
+   "code": "IDFC3H",
+   "name": "Freedom Combo 20GB / 30 Days",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 86500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 20,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "l",
+    "validity": null,
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=IDFC3H"
+  },
+  {
+   "code": "ISAT-FS2-99000",
+   "name": "Isat Data - Freedom Spesial 60GB 30 Hari (2GB/Hari)",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 99000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 60,
+   "validity_days": 30,
+   "rate_per_gb_day": 55,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=ISAT-FS2-99000"
+  },
+  {
+   "code": "VIDF52",
+   "name": "Voucher Freedom Internet 52GB 28 Hari",
+   "catalogue": "electric-quota",
+   "operator": "Indosat",
+   "price": 121000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 52,
+   "validity_days": 28,
+   "rate_per_gb_day": 83.1,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VIDF52"
+  },
+  {
+   "code": "isatdataFI8GB",
+   "name": "Indosat Paket Internet Freedom Internet 80GB / 28 Hari",
+   "catalogue": "data-package",
+   "operator": "Indosat",
+   "price": 153500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 80,
+   "validity_days": 28,
+   "rate_per_gb_day": 68.53,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=isatdataFI8GB"
+  },
+  {
+   "code": "CM5H",
+   "name": "SMART 5RB",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 8000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": null,
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=CM5H"
+  },
+  {
+   "code": "smartdatamuv7",
+   "name": "Smartfren Paket Internet Kuota Musik 3.5GB + Bonus 1GB Kuota Utama / 7 Hari",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 13000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 4.5,
+   "validity_days": 7,
+   "rate_per_gb_day": 412.7,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=smartdatamuv7"
+  },
+  {
+   "code": "smartdatam3gb",
+   "name": "Smartfren Paket Internet Kuota 3GB 5 Hari",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 16500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 3,
+   "validity_days": 5,
+   "rate_per_gb_day": 1100,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=smartdatam3gb"
+  },
+  {
+   "code": "BBL-DV-SF-6GB-7H-OK",
+   "name": "Act Voucher 6GB 7 Hari",
+   "catalogue": "data-voucher",
+   "operator": "Smartfren",
+   "price": 19500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 6,
+   "validity_days": 7,
+   "rate_per_gb_day": 464.29,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BBL-DV-SF-6GB-7H-OK"
+  },
+  {
+   "code": "smartdataSUH5GB1D",
+   "name": "Smartfren Paket Internet Unlimited Harian 5GB 1 Hari",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 23000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 5,
+   "validity_days": 1,
+   "rate_per_gb_day": 4600,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "m",
+    "validity": "1d",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=smartdataSUH5GB1D"
+  },
+  {
+   "code": "VSNU14",
+   "name": "Vcr Smart Nonstop 12GB 10 Hari",
+   "catalogue": "electric-quota",
+   "operator": "Smartfren",
+   "price": 31000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 12,
+   "validity_days": 10,
+   "rate_per_gb_day": 258.33,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "mid",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VSNU14"
+  },
+  {
+   "code": "SMDKT92",
+   "name": "Smart Data Nonstop 9GB 28 Hari",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 38500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 9,
+   "validity_days": 28,
+   "rate_per_gb_day": 152.78,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=SMDKT92"
+  },
+  {
+   "code": "VSNA10G",
+   "name": "Voucher Smart Nonstop 10GB 28Hari",
+   "catalogue": "electric-quota",
+   "operator": "Smartfren",
+   "price": 43500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 10,
+   "validity_days": 28,
+   "rate_per_gb_day": 155.36,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VSNA10G"
+  },
+  {
+   "code": "VSNU10",
+   "name": "Vcr Smart Nonstop 16GB 28 Hari",
+   "catalogue": "electric-quota",
+   "operator": "Smartfren",
+   "price": 57000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 16,
+   "validity_days": 28,
+   "rate_per_gb_day": 127.23,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VSNU10"
+  },
+  {
+   "code": "VSV50",
+   "name": "Vcr Smart 40GB All 14 Hari",
+   "catalogue": "electric-quota",
+   "operator": "Smartfren",
+   "price": 66500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 40,
+   "validity_days": 14,
+   "rate_per_gb_day": 118.75,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "mid",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VSV50"
+  },
+  {
+   "code": "SMART-U5-77000",
+   "name": "Unlimited Harian 700MB 30 Hari",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 79500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 0.68,
+   "validity_days": 30,
+   "rate_per_gb_day": 3897.06,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "s",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=SMART-U5-77000"
+  },
+  {
+   "code": "SMDSK20",
+   "name": "Kuota 45GB Reguler 30 Hari",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 95000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 45,
+   "validity_days": 30,
+   "rate_per_gb_day": 70.37,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=SMDSK20"
+  },
+  {
+   "code": "SMART-N3-115000",
+   "name": "Unlimited Nonstop 75GB 30 Hari",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 125000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 75,
+   "validity_days": 30,
+   "rate_per_gb_day": 55.56,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=SMART-N3-115000"
+  },
+  {
+   "code": "CM150H",
+   "name": "SMART 150RB",
+   "catalogue": "data-package",
+   "operator": "Smartfren",
+   "price": 155500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": null,
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=CM150H"
+  },
+  {
+   "code": "BYRDATA",
+   "name": "Bayar Telkomsel Data",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 3500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": null,
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BYRDATA"
+  },
+  {
+   "code": "TND10H",
+   "name": "Data 0,8GB s.d 2GB 1 Hari Sesuai Zona",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 13500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 2,
+   "validity_days": 1,
+   "rate_per_gb_day": 6750,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "s",
+    "validity": "1d",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TND10H"
+  },
+  {
+   "code": "VMSUL2Z3",
+   "name": "(Zona 3 ) Voucher Kuota 1GB 5 Hari",
+   "catalogue": "electric-quota",
+   "operator": "Telkomsel",
+   "price": 18000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 1,
+   "validity_days": 5,
+   "rate_per_gb_day": 3600,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "s",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VMSUL2Z3"
+  },
+  {
+   "code": "SBD2",
+   "name": "2GB All Jaringan 28 Hari",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 23000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 2,
+   "validity_days": 28,
+   "rate_per_gb_day": 410.71,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "s",
+    "validity": "long",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=SBD2"
+  },
+  {
+   "code": "VMSUL95",
+   "name": "Voucher Kuota 4GB + 5GB Lokal 5 Hari",
+   "catalogue": "electric-quota",
+   "operator": "Telkomsel",
+   "price": 27500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 9,
+   "validity_days": 5,
+   "rate_per_gb_day": 611.11,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VMSUL95"
+  },
+  {
+   "code": "VMSUL97",
+   "name": "Voucher Kuota 4GB + 5GB Lokal 7 Hari",
+   "catalogue": "electric-quota",
+   "operator": "Telkomsel",
+   "price": 33000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 9,
+   "validity_days": 7,
+   "rate_per_gb_day": 523.81,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VMSUL97"
+  },
+  {
+   "code": "TKS5",
+   "name": "3GB All + 2GB Sosmed 30 hari",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 44500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 5,
+   "validity_days": 30,
+   "rate_per_gb_day": 296.67,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TKS5"
+  },
+  {
+   "code": "TDH10GB3",
+   "name": "Mini Data 10GB All 3 Hari",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 54500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 10,
+   "validity_days": 3,
+   "rate_per_gb_day": 1816.67,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TDH10GB3"
+  },
+  {
+   "code": "tseldata6GB",
+   "name": "Telkomsel Paket Internet Data 6GB 30 Hari",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 67000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 6,
+   "validity_days": 30,
+   "rate_per_gb_day": 372.22,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=tseldata6GB"
+  },
+  {
+   "code": "htselttsop11",
+   "name": "Telkomsel Telkomsel Telepon Semua Operator 3.700 Menit 30 Hari (Pamasuka)",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 79000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": 30,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=htselttsop11"
+  },
+  {
+   "code": "tseldata14GB",
+   "name": "Telkomsel Paket Internet 14 GB semua jaringan + bebas zona",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 101000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 14,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "l",
+    "validity": null,
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=tseldata14GB"
+  },
+  {
+   "code": "TKS57",
+   "name": "32GB All + 25GB DPI 30 Hari",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 132500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 57,
+   "validity_days": 30,
+   "rate_per_gb_day": 77.49,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TKS57"
+  },
+  {
+   "code": "tseldataB75GB",
+   "name": "Telkomsel Paket Internet Internet Bulanan 75GB",
+   "catalogue": "data-package",
+   "operator": "Telkomsel",
+   "price": 203500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 75,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "xxl",
+    "validity": null,
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=tseldataB75GB"
+  },
+  {
+   "code": "BBL-DV-TSEL-5GB-1H-OK",
+   "name": "Act Vocer 2GB + 3GB Lokal 1 Hari",
+   "catalogue": "data-voucher",
+   "operator": "Telkomsel",
+   "price": 12000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": false,
+   "volume_gb": 5,
+   "validity_days": 1,
+   "rate_per_gb_day": 2400,
+   "is_smart_pick": true,
+   "is_worth_it": false,
+   "badges": [
+    "smart_pick"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "1d",
+    "price": "p1"
+   },
+   "buy_url": null
+  },
+  {
+   "code": "threema4m",
+   "name": "Tri Paket Internet Three Masa Aktif Kartu 4 Bulan",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 6500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": 112,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": "xlong",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=threema4m"
+  },
+  {
+   "code": "TRH6M2",
+   "name": "Happy 6GB 2 Hari",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 13500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 6,
+   "validity_days": 2,
+   "rate_per_gb_day": 1125,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TRH6M2"
+  },
+  {
+   "code": "TMD2500",
+   "name": "2,5GB All Jaringan 14 Hari",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 17000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 2.5,
+   "validity_days": 14,
+   "rate_per_gb_day": 485.71,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "s",
+    "validity": "mid",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TMD2500"
+  },
+  {
+   "code": "BBL-DV-TRI-20GB-3H-OK",
+   "name": "Act Vcr Happy Kalisumapa Spesial 20GB 3 Hari",
+   "catalogue": "data-voucher",
+   "operator": "Tri",
+   "price": 21000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 20,
+   "validity_days": 3,
+   "rate_per_gb_day": 350,
+   "is_smart_pick": true,
+   "is_worth_it": false,
+   "badges": [
+    "smart_pick"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BBL-DV-TRI-20GB-3H-OK"
+  },
+  {
+   "code": "TRH9M7",
+   "name": "9GB All + 3GB Bonus 7 Hari",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 25000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 12,
+   "validity_days": 7,
+   "rate_per_gb_day": 297.62,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TRH9M7"
+  },
+  {
+   "code": "BBL-DV-TRI-30GB-5H-OK",
+   "name": "Act Vcr Happy Kalisumapa Spesial 30GB 5 Hari",
+   "catalogue": "data-voucher",
+   "operator": "Tri",
+   "price": 29000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 30,
+   "validity_days": 5,
+   "rate_per_gb_day": 193.33,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BBL-DV-TRI-30GB-5H-OK"
+  },
+  {
+   "code": "VAONKA5",
+   "name": "Voucher Tri Kasumapa AON 5GB",
+   "catalogue": "electric-quota",
+   "operator": "Tri",
+   "price": 33500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 5,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "m",
+    "validity": null,
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VAONKA5"
+  },
+  {
+   "code": "TDLH8",
+   "name": "8GB + 2GB 4G 24 Jam 30 Hari",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 46500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 10,
+   "validity_days": 30,
+   "rate_per_gb_day": 155,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TDLH8"
+  },
+  {
+   "code": "HTDH2228H",
+   "name": "Three Data Happy 22 GB - 28 Hari",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 58500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 22,
+   "validity_days": 28,
+   "rate_per_gb_day": 94.97,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=HTDH2228H"
+  },
+  {
+   "code": "TDRMY15H",
+   "name": "CounTri Roam Malaysia 15GB 3 Hari",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 77500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 15,
+   "validity_days": 3,
+   "rate_per_gb_day": 1722.22,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TDRMY15H"
+  },
+  {
+   "code": "threedataMY5D",
+   "name": "Tri Paket Internet ROAM Malaysia 5 Days",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 97500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": null,
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=threedataMY5D"
+  },
+  {
+   "code": "VAONKA40",
+   "name": "Voucher Tri Kasumapa AON 40GB",
+   "catalogue": "electric-quota",
+   "operator": "Tri",
+   "price": 120000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 40,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "xl",
+    "validity": null,
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VAONKA40"
+  },
+  {
+   "code": "TDHP155H",
+   "name": "Happy 155GB 28 hr H",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 159500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 155,
+   "validity_days": 28,
+   "rate_per_gb_day": 36.75,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=TDHP155H"
+  },
+  {
+   "code": "threedataRIB14GB15D",
+   "name": "Tri Paket Internet Tri Ibadah 15GB 15 Hari",
+   "catalogue": "data-package",
+   "operator": "Tri",
+   "price": 301500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 15,
+   "validity_days": 15,
+   "rate_per_gb_day": 1340,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "l",
+    "validity": "mid",
+    "price": "p5"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=threedataRIB14GB15D"
+  },
+  {
+   "code": "xldatablue1",
+   "name": "XL Paket Internet XL Data Blue 1GB / 2 Hari",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 7500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 1,
+   "validity_days": 2,
+   "rate_per_gb_day": 3750,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "s",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=xldatablue1"
+  },
+  {
+   "code": "XNO7H",
+   "name": "XL Nelp 350menit (Sesama XL)+50menit Opr Lain",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 13500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": null,
+   "validity_days": null,
+   "rate_per_gb_day": null,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": null,
+    "validity": null,
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=XNO7H"
+  },
+  {
+   "code": "xldatafxm2",
+   "name": "XL Paket Internet Xl Data Flex Mini 12gb / 2 Hari",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 16500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 12,
+   "validity_days": 2,
+   "rate_per_gb_day": 687.5,
+   "is_smart_pick": true,
+   "is_worth_it": false,
+   "badges": [
+    "smart_pick"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=xldatafxm2"
+  },
+  {
+   "code": "BBL-DV-XL-20GB-3H-OK",
+   "name": "Act Vocer Flex Mini 20GB 3 Hari",
+   "catalogue": "data-voucher",
+   "operator": "XL",
+   "price": 21000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 20,
+   "validity_days": 3,
+   "rate_per_gb_day": 350,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BBL-DV-XL-20GB-3H-OK"
+  },
+  {
+   "code": "XM6",
+   "name": "Paket Harian L (5.5GB - 8.5GB) - 5 Hari",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 25000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 8.5,
+   "validity_days": 5,
+   "rate_per_gb_day": 588.24,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=XM6"
+  },
+  {
+   "code": "BBL-DV-XL-10GB-10H-OK",
+   "name": "Act Vocer M 3,5GB + 1GB - 5,5GB Lokal 10 Hari",
+   "catalogue": "data-voucher",
+   "operator": "XL",
+   "price": 31000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 10,
+   "validity_days": 10,
+   "rate_per_gb_day": 310,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "mid",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BBL-DV-XL-10GB-10H-OK"
+  },
+  {
+   "code": "XCXFS",
+   "name": "Flex S 3.5GB-5GB + 5 mnt All 21 Hari",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 34500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 8.5,
+   "validity_days": 21,
+   "rate_per_gb_day": 193.28,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=XCXFS"
+  },
+  {
+   "code": "xldatafxm30g7h",
+   "name": "XL Paket Internet Flex Mini 30GB, 7hr",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 42000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 30,
+   "validity_days": 7,
+   "rate_per_gb_day": 200,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=xldatafxm30g7h"
+  },
+  {
+   "code": "XCFM",
+   "name": "Flex M  5GB + Kuota Area 2GB-10GB + Bonus Flex 28 Hari",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 51000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 17,
+   "validity_days": 28,
+   "rate_per_gb_day": 107.14,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=XCFM"
+  },
+  {
+   "code": "xldatabp7gb",
+   "name": "XL Paket Internet XL Data Bebas Puas 7 GB 28 Hari",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 62000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 7,
+   "validity_days": 28,
+   "rate_per_gb_day": 316.33,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=xldatabp7gb"
+  },
+  {
+   "code": "VXFM34",
+   "name": "Vcr Flex Max 36GB 28 Hari",
+   "catalogue": "electric-quota",
+   "operator": "XL",
+   "price": 77500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 36,
+   "validity_days": 28,
+   "rate_per_gb_day": 76.88,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VXFM34"
+  },
+  {
+   "code": "XBP3K28",
+   "name": "Bebas Puas 14GB-28GB 28 Hari",
+   "catalogue": "data-package",
+   "operator": "XL",
+   "price": 89500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 28,
+   "validity_days": 28,
+   "rate_per_gb_day": 114.16,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=XBP3K28"
+  },
+  {
+   "code": "VXCF4",
+   "name": "Vcr Flex XL 15GB + Kuota Area 5GB-30GB + Bonus Flex 28 Hari",
+   "catalogue": "electric-quota",
+   "operator": "XL",
+   "price": 107500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 50,
+   "validity_days": 28,
+   "rate_per_gb_day": 76.79,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VXCF4"
+  },
+  {
+   "code": "VXBP5K30",
+   "name": "Vcr Bebas Puas 54GB-90GB 30 Hari",
+   "catalogue": "electric-quota",
+   "operator": "XL",
+   "price": 164000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 90,
+   "validity_days": 30,
+   "rate_per_gb_day": 60.74,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VXBP5K30"
+  },
+  {
+   "code": "BYUH2",
+   "name": "Kuota ByU 2GB 1 Hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 11500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 2,
+   "validity_days": 1,
+   "rate_per_gb_day": 5750,
+   "is_smart_pick": false,
+   "is_worth_it": false,
+   "badges": [],
+   "buckets": {
+    "volume": "s",
+    "validity": "1d",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BYUH2"
+  },
+  {
+   "code": "byudata6g3h",
+   "name": "by.U Paket Internet by.U Data 6 GB 3 Hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 17000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 6,
+   "validity_days": 3,
+   "rate_per_gb_day": 944.44,
+   "is_smart_pick": true,
+   "is_worth_it": false,
+   "badges": [
+    "smart_pick"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=byudata6g3h"
+  },
+  {
+   "code": "byudata7gb5h",
+   "name": "by.U Paket Internet by.U Data 7.5 GB 5 Hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 19500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 7.5,
+   "validity_days": 5,
+   "rate_per_gb_day": 520,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=byudata7gb5h"
+  },
+  {
+   "code": "BYUH47",
+   "name": "Kuota Byu 14GB 7 Hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 26000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 14,
+   "validity_days": 7,
+   "rate_per_gb_day": 265.31,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "short",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BYUH47"
+  },
+  {
+   "code": "byudatask8GB",
+   "name": "by.U Paket Internet Super Kaget 8GB / 14 hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 30500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 8,
+   "validity_days": 14,
+   "rate_per_gb_day": 272.32,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "mid",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=byudatask8GB"
+  },
+  {
+   "code": "BYD3H",
+   "name": "BYU DATA 3 GB - 28 Hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 38500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 3,
+   "validity_days": 28,
+   "rate_per_gb_day": 458.33,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BYD3H"
+  },
+  {
+   "code": "BYUB5",
+   "name": "Kuota ByU 5GB 28 Hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 40500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 5,
+   "validity_days": 28,
+   "rate_per_gb_day": 289.29,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BYUB5"
+  },
+  {
+   "code": "byudata6gb",
+   "name": "by.U Paket Internet Data 6GB / 30 hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 42000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 6,
+   "validity_days": 30,
+   "rate_per_gb_day": 233.33,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "long",
+    "price": "p2"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=byudata6gb"
+  },
+  {
+   "code": "byudatask11GB",
+   "name": "by.U Paket Internet Super Kaget 11GB / 30 hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 51000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 11,
+   "validity_days": 30,
+   "rate_per_gb_day": 154.55,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=byudatask11GB"
+  },
+  {
+   "code": "VBYUB20",
+   "name": "Voucher Data BYU 20GB 30 Hari",
+   "catalogue": "electric-quota",
+   "operator": "by.U",
+   "price": 79500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 20,
+   "validity_days": 30,
+   "rate_per_gb_day": 132.5,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p3"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=VBYUB20"
+  },
+  {
+   "code": "BYUB37",
+   "name": "Kuota ByU 37GB 28 Hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 102000,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 37,
+   "validity_days": 28,
+   "rate_per_gb_day": 98.46,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=BYUB37"
+  },
+  {
+   "code": "byudata23gb",
+   "name": "by.U Paket Internet Data 23GB / 30 hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 108500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 23,
+   "validity_days": 30,
+   "rate_per_gb_day": 157.25,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "l",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=byudata23gb"
+  },
+  {
+   "code": "byudata125g30h",
+   "name": "by.U Paket Internet by.U Data 125 GB 30 Hari",
+   "catalogue": "data-package",
+   "operator": "by.U",
+   "price": 212500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": true,
+   "volume_gb": 125,
+   "validity_days": 30,
+   "rate_per_gb_day": 56.67,
+   "is_smart_pick": false,
+   "is_worth_it": true,
+   "badges": [
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "xxl",
+    "validity": "long",
+    "price": "p4"
+   },
+   "buy_url": "https://babelii.diofis.net/guest/order?product_code=byudata125g30h"
+  },
+  {
+   "code": "BBL-DV-BYU-7.5GB-7H-OK",
+   "name": "Act Voucher ByU 7,5GB 7 Hari",
+   "catalogue": "data-voucher",
+   "operator": "by.U",
+   "price": 22500,
+   "price_type": "fixed",
+   "currency": "IDR",
+   "available": false,
+   "volume_gb": 7.5,
+   "validity_days": 7,
+   "rate_per_gb_day": 428.57,
+   "is_smart_pick": true,
+   "is_worth_it": true,
+   "badges": [
+    "smart_pick",
+    "worth_it"
+   ],
+   "buckets": {
+    "volume": "m",
+    "validity": "short",
+    "price": "p1"
+   },
+   "buy_url": null
+  }
+ ],
+ "meta": {
+  "total": 1493,
+  "catalogue": {
+   "key": "ibp",
+   "name": "Internet Broadband Package",
+   "subtitle": "Gabungan Data Voucher, Kuota Elektrik, dan Paket Data.",
+   "includes": [
+    "data-voucher",
+    "electric-quota",
+    "data-package"
+   ]
+  },
+  "facets": {
+   "operators": [
+    "AXIS",
+    "Indosat",
+    "Smartfren",
+    "Telkomsel",
+    "Tri",
+    "XL",
+    "by.U"
+   ],
+   "volume": [
+    {
+     "key": "s",
+     "label": "Di bawah 3 GB"
+    },
+    {
+     "key": "m",
+     "label": "3 – 9 GB"
+    },
+    {
+     "key": "l",
+     "label": "10 – 24 GB"
+    },
+    {
+     "key": "xl",
+     "label": "25 – 49 GB"
+    },
+    {
+     "key": "xxl",
+     "label": "50 GB ke atas"
+    }
+   ],
+   "validity": [
+    {
+     "key": "1d",
+     "label": "1 hari"
+    },
+    {
+     "key": "short",
+     "label": "2 – 7 hari"
+    },
+    {
+     "key": "mid",
+     "label": "8 – 15 hari"
+    },
+    {
+     "key": "long",
+     "label": "16 – 30 hari"
+    },
+    {
+     "key": "xlong",
+     "label": "Lebih dari 30 hari"
+    }
+   ],
+   "price": [
+    {
+     "key": "p1",
+     "label": "Di bawah Rp 25.000"
+    },
+    {
+     "key": "p2",
+     "label": "Rp 25.000 – 50.000"
+    },
+    {
+     "key": "p3",
+     "label": "Rp 50.000 – 100.000"
+    },
+    {
+     "key": "p4",
+     "label": "Rp 100.000 – 250.000"
+    },
+    {
+     "key": "p5",
+     "label": "Rp 250.000 ke atas"
+    }
+   ],
+   "catalogues": [
+    "data-voucher",
+    "electric-quota",
+    "data-package"
+   ]
+  }
+ },
+ "links": {
+  "self": "http://babelii.diofis.net/public-api/v1/catalogue/ibp",
+  "page_url": null
+ }
+}

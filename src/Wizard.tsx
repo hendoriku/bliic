@@ -12,7 +12,8 @@ interface Step { key: Key; question: string; options: Option[] }
 
 const UNSURE: Option = { value: "tidak_yakin", label: "Tidak yakin", unsure: true };
 
-const niceOperator = (o: string) => (o.length <= 3 ? o : o[0] + o.slice(1).toLowerCase());
+/** "AXIS" -> "Axis"; nama yang sudah campuran huruf ("by.U", "Indosat") dan singkatan pendek ("XL") dibiarkan. */
+const niceOperator = (o: string) => (o.length > 3 && o === o.toUpperCase() ? o[0] + o.slice(1).toLowerCase() : o);
 
 function buildSteps(operators: string[]): Step[] {
   return [

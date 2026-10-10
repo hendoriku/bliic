@@ -72,6 +72,9 @@ export function getRecommendations(items: IbpItem[], a: Answers): Result {
   // Tahap 1: hard filter
   const valid = items
     .filter((i) => i.available)
+    // Blueprint mensyaratkan total_gb dan masa_aktif_hari. Item tanpa keduanya (tagihan, pulsa, SMS,
+    // perpanjangan masa aktif, "unlimited per jam") bukan paket data yang bisa dibandingkan.
+    .filter((i) => i.volumeGb !== null && i.volumeGb > 0 && i.validityDays !== null && i.validityDays > 0)
     .map(toProduct)
     .filter((p) => {
       if (p.item.operator !== a.operator) return false;
