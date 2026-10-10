@@ -1,5 +1,16 @@
+/* Font global: Captura (hanya bobot Regular tersedia; tebal disintesis browser).
+   Dimuat dari server Babelii; jika gagal, tampil font sistem lalu berganti otomatis (swap). */
+@font-face {
+  font-family: "Captura";
+  src: url("https://babelii.diofis.net/fonts/Captura-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg: #f6f7fb; --surface: #fff; --text: #14161f; --muted: #667085; --line: #e4e7ec;
+  --font: "Captura", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --brand: #2563eb; --brand-text: #fff; --ok: #067647; --warn: #b54708; --chip: #eef2ff;
   color-scheme: light dark;
 }
@@ -7,7 +18,8 @@
   :root { --bg: #0f1117; --surface: #181b25; --text: #eceef5; --muted: #98a2b3; --line: #2a2f3d; --brand: #5b8cff; --brand-text: #0b1020; --ok: #4ade80; --warn: #fbbf24; --chip: #232a40; }
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 var(--font); }
+button, input, select, textarea { font-family: inherit; } /* kontrol form tidak mewarisi font secara bawaan */
 .app { max-width: 1100px; margin: 0 auto; padding: 0 16px 48px; }
 .top { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 14px 0 0; border-bottom: 1px solid var(--line); }
 .top h1 { margin: 0 0 8px; font-size: 20px; } .top h1 span { color: var(--muted); font-weight: 400; font-size: 14px; }
@@ -79,7 +91,7 @@ dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
 .row-main { min-width: 0; display: grid; gap: 4px; }
 .row-main h3 { margin: 0; font-size: 15px; line-height: 1.3; }
 .row-top { display: flex; gap: 10px; font-size: 12px; color: var(--muted); }
-.code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; color: var(--muted); }
+.code { font-size: 11px; font-variant-numeric: tabular-nums; color: var(--muted); }
 .row-details { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; }
 .row-details em { font-style: normal; color: var(--muted); }
 .row-buy { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
