@@ -17,7 +17,7 @@ const DEFAULT_PATHS = [
 ];
 
 const client = new ApiClient({
-  baseUrl: process.env.API_BASE_URL ?? "https://babelii.diofis.net",
+  baseUrl: process.env.API_BASE_URL ?? "https://babelii.diofis.net/public-api/v1",
   token: process.env.API_TOKEN,
   retries: 1,
 });
