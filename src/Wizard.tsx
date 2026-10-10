@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import type { IbpItem } from "./api/ibp.ts";
-import { PackageCard } from "./components/PackageCard.tsx";
+import { ItemsView } from "./components/ItemsView.tsx";
+import { ViewToggle } from "./components/ViewToggle.tsx";
+import type { Entry, View } from "./view.ts";
 import { rupiah } from "./format.ts";
 import { compareBadge, getRecommendations, type Answers } from "./wizard/engine.ts";
 
@@ -74,7 +76,7 @@ function buildSteps(operators: string[]): Step[] {
   ];
 }
 
-export function Wizard({ items }: { items: IbpItem[] }) {
+export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: View; onViewChange: (v: View) => void }) {
   const operators = useMemo(() => [...new Set(items.map((i) => i.operator))].sort(), [items]);
   const steps = useMemo(() => buildSteps(operators), [operators]);
   const [answers, setAnswers] = useState<Partial<Answers>>({});
@@ -125,24 +127,36 @@ export function Wizard({ items }: { items: IbpItem[] }) {
   const a = answers as Answers;
   const label = (k: Key) => steps.find((s) => s.key === k)!.options.find((o) => o.value === a[k])?.label ?? "-";
   return (
-    <section className="wiz">
-      <h2 className="q">Rekomendasi untukmu</h2>
+    <section className="wiz wide">
+      <div className="bar">
+        <h2 className="q">Rekomendasi untukmu</h2>
+        <ViewToggle view={view} onChange={onViewChange} />
+      </div>
       <p className="summary">
         {steps.map((s) => label(s.key)).join(" · ")}
       </p>
       {!r.primary ? (
         <p className="state">{r.message} Coba ubah jawabanmu, misalnya anggaran atau durasi.</p>
       ) : (
-        <ul className="grid wiz-grid">
-          <li>
-            <PackageCard item={r.primary.item} rows={["kuota", "masa"]} showPricePerGb highlight={{ text: a.priority === "cheapest" ? "Paling Hemat Tunai" : "Paling Pas Dengan Kebutuhanmu", tone: "main" }} />
-          </li>
-          {r.secondary && (
-            <li>
-              <PackageCard item={r.secondary.item} rows={["kuota", "masa"]} showPricePerGb highlight={{ text: compareBadge(r.primary, r.secondary, rupiah), tone: "alt" }} />
-            </li>
-          )}
-        </ul>
+        <ItemsView
+          view={view}
+          entries={
+            [
+              {
+                item: r.primary.item,
+                rows: ["kuota", "masa"],
+                showPricePerGb: true,
+                highlight: { text: a.priority === "cheapest" ? "Paling Hemat Tunai" : "Paling Pas Dengan Kebutuhanmu", tone: "main" },
+              },
+              r.secondary && {
+                item: r.secondary.item,
+                rows: ["kuota", "masa"],
+                showPricePerGb: true,
+                highlight: { text: compareBadge(r.primary, r.secondary, rupiah), tone: "alt" },
+              },
+            ].filter(Boolean) as Entry[]
+          }
+        />
       )}
       <div className="wiz-actions">
         <button className="link" onClick={() => setStep(steps.length - 1)}>← Ubah jawaban terakhir</button>
