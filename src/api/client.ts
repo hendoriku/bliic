@@ -42,7 +42,7 @@ export class ApiClient {
     this.token = opts.token || undefined;
     this.timeoutMs = opts.timeoutMs ?? 10_000;
     this.retries = opts.retries ?? 2;
-    this.fetchImpl = opts.fetchImpl ?? fetch;
+    this.fetchImpl = opts.fetchImpl ?? ((input, init) => fetch(input, init));
   }
 
   /** GET tanpa interpretasi skema: berguna untuk menyelidiki respons asli. */
