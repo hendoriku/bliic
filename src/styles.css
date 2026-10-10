@@ -1,0 +1,47 @@
+:root {
+  --bg: #f6f7fb; --surface: #fff; --text: #14161f; --muted: #667085; --line: #e4e7ec;
+  --brand: #2563eb; --brand-text: #fff; --ok: #067647; --warn: #b54708; --chip: #eef2ff;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f1117; --surface: #181b25; --text: #eceef5; --muted: #98a2b3; --line: #2a2f3d; --brand: #5b8cff; --brand-text: #0b1020; --ok: #4ade80; --warn: #fbbf24; --chip: #232a40; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.app { max-width: 1100px; margin: 0 auto; padding: 0 16px 48px; }
+.top { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 14px 0 0; border-bottom: 1px solid var(--line); }
+.top h1 { margin: 0 0 8px; font-size: 20px; } .top h1 span { color: var(--muted); font-weight: 400; font-size: 14px; }
+.tabs { display: flex; gap: 4px; }
+.tabs button { flex: 1; background: none; border: 0; padding: 10px; font: inherit; color: var(--muted); border-bottom: 3px solid transparent; cursor: pointer; }
+.tabs button[aria-selected="true"] { color: var(--brand); border-color: var(--brand); font-weight: 600; }
+main { padding-top: 16px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+.chips button { white-space: nowrap; border: 1px solid var(--line); background: var(--surface); color: var(--text); padding: 7px 14px; border-radius: 999px; font: inherit; cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--brand); color: var(--brand-text); border-color: var(--brand); }
+.filters { display: grid; gap: 8px; grid-template-columns: 1fr; margin: 10px 0; }
+@media (min-width: 700px) { .filters { grid-template-columns: 2fr 1fr 1fr auto; align-items: center; } }
+input, select { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); font: inherit; }
+.check { display: flex; gap: 6px; align-items: center; white-space: nowrap; } .check input { width: auto; }
+.count { color: var(--muted); margin: 4px 0 10px; }
+.grid { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.card { height: 100%; display: flex; flex-direction: column; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.card.off { opacity: .55; }
+.card h3 { margin: 0; font-size: 15px; line-height: 1.3; }
+.meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+.op { font-weight: 700; color: var(--text); }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; min-height: 0; }
+.b { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--chip); }
+.b.smart { color: var(--brand); font-weight: 600; } .b.worth { color: var(--ok); font-weight: 600; }
+dl { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 8px; }
+dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
+.reason { margin: 0; font-size: 12px; color: var(--ok); }
+.buy { margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 6px; }
+.buy strong { font-size: 18px; }
+.btn { background: var(--brand); color: var(--brand-text); padding: 8px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; }
+.btn.disabled { background: var(--line); color: var(--muted); }
+.form { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.form label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.h2 { font-size: 17px; margin: 20px 0 10px; }
+.state { text-align: center; color: var(--muted); padding: 32px 8px; }
+.state.error { color: var(--warn); } .state button { margin-top: 8px; padding: 8px 16px; }
+.debug { margin-top: 28px; color: var(--muted); font-size: 12px; } .debug pre { overflow: auto; background: var(--surface); padding: 10px; border-radius: 8px; }
