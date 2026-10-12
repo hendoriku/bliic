@@ -4,18 +4,43 @@ import { ItemsView } from "./components/ItemsView.tsx";
 import { ViewToggle } from "./components/ViewToggle.tsx";
 import type { Entry, View } from "./view.ts";
 import { rupiah } from "./format.ts";
-import { compareBadge, getRecommendations, type Answers } from "./wizard/engine.ts";
+import {
+  compareBadge,
+  compareUnlimitedBadge,
+  countUnlimited,
+  getRecommendations,
+  type Answers,
+  type Phone,
+  type Scheme,
+} from "./wizard/engine.ts";
 
 type Key = keyof Answers;
 interface Option { value: string; label: string; hint?: string; unsure?: boolean }
-interface Step { key: Key; question: string; options: Option[] }
+interface Step {
+  key: Key;
+  question: string;
+  options: Option[] | ((a: Partial<Answers>) => Option[]);
+  /** Langkah hanya ditanyakan bila syaratnya terpenuhi (urutan dan jumlah pertanyaan bersifat dinamis). */
+  when?: (a: Partial<Answers>) => boolean;
+  /** Perkiraan untuk penghitung "dari N" saat jawaban penentu `when` belum lengkap (default: sama dengan `when`). */
+  maybe?: (a: Partial<Answers>) => boolean;
+}
+const optionsOf = (s: Step, a: Partial<Answers>): Option[] => (typeof s.options === "function" ? s.options(a) : s.options);
 
 const UNSURE: Option = { value: "tidak_yakin", label: "Tidak yakin", unsure: true };
 
 /** "AXIS" -> "Axis"; nama yang sudah campuran huruf ("by.U", "Indosat") dan singkatan pendek ("XL") dibiarkan. */
 const niceOperator = (o: string) => (o.length > 3 && o === o.toUpperCase() ? o[0] + o.slice(1).toLowerCase() : o);
 
-function buildSteps(operators: string[]): Step[] {
+/** Skema efektif: "unlimited" hanya berlaku bila pertanyaannya memang diajukan (operator punya paket unlimited murni). */
+function effectiveScheme(a: Partial<Answers>, items: IbpItem[]): Scheme {
+  return schemeAsked(a, items) && a.scheme === "unlimited" ? "unlimited" : "volume";
+}
+const schemeAsked = (a: Partial<Answers>, items: IbpItem[]): boolean =>
+  !!a.operator && !!a.phone && countUnlimited(items, a.operator, a.phone as Phone) > 0;
+
+function buildSteps(operators: string[], items: IbpItem[]): Step[] {
+  const volumeOnly = (a: Partial<Answers>) => effectiveScheme(a, items) === "volume";
   return [
     {
       key: "operator",
@@ -28,6 +53,23 @@ function buildSteps(operators: string[]): Step[] {
       options: [
         { value: "ya", label: "Ya, bersedia", hint: "semua jenis paket" },
         { value: "tidak", label: "Tidak", hint: "voucher & kuota elektrik" },
+      ],
+    },
+    {
+      // Posisi ini sengaja: ditanya SETELAH operator + nomor HP (ketersediaan unlimited bergantung pada keduanya)
+      // dan SEBELUM kriteria lain (menentukan apakah pemakaian harian & prioritas masih relevan).
+      key: "scheme",
+      question: "Kamu mau paket kuota biasa atau unlimited?",
+      when: (a) => schemeAsked(a, items),
+      // Sebelum nomor HP dijawab, anggap "ya" (kemungkinan terbanyak) agar total tidak melompat-lompat.
+      maybe: (a) => !a.operator || countUnlimited(items, a.operator, (a.phone ?? "ya") as Phone) > 0,
+      options: (a) => [
+        { value: "volume", label: "Kuota volume biasa", hint: "ada batas GB" },
+        {
+          value: "unlimited",
+          label: "Skema unlimited",
+          hint: `tanpa batas kuota · ${countUnlimited(items, a.operator!, a.phone as Phone)} paket`,
+        },
       ],
     },
     {
@@ -47,6 +89,7 @@ function buildSteps(operators: string[]): Step[] {
     },
     {
       key: "usage",
+      when: volumeOnly,
       question: "Perkiraan pemakaian harianmu?",
       options: [
         { value: "ringan", label: "Ringan", hint: "< 2 GB" },
@@ -67,6 +110,7 @@ function buildSteps(operators: string[]): Step[] {
     },
     {
       key: "priority",
+      when: volumeOnly,
       question: "Apa prioritas utamamu?",
       options: [
         { value: "cheapest", label: "Hemat bayar tunai" },
@@ -79,14 +123,18 @@ function buildSteps(operators: string[]): Step[] {
 
 export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: View; onViewChange: (v: View) => void }) {
   const operators = useMemo(() => [...new Set(items.map((i) => i.operator))].sort(), [items]);
-  const steps = useMemo(() => buildSteps(operators), [operators]);
+  const allSteps = useMemo(() => buildSteps(operators, items), [operators, items]);
   const [answers, setAnswers] = useState<Partial<Answers>>({});
   const [step, setStep] = useState(0);
+  const steps = allSteps.filter((s) => !s.when || s.when(answers));
+  // Jumlah pertanyaan yang diperkirakan untuk label "N dari M" (bisa menyusut begitu jawaban penentu diketahui).
+  const projected = allSteps.filter((s) => (s.maybe ?? s.when)?.(answers) ?? true).length;
+  const scheme = effectiveScheme(answers, items);
 
   const done = step >= steps.length;
   const result = useMemo(
-    () => (done ? getRecommendations(items, answers as Answers) : null),
-    [done, items, answers],
+    () => (done ? getRecommendations(items, { ...(answers as Answers), scheme }) : null),
+    [done, items, answers, scheme],
   );
 
   const choose = (key: Key, value: string) => {
@@ -102,13 +150,13 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
     const s = steps[step];
     return (
       <section className="wiz">
-        <div className="progress" role="progressbar" aria-valuemin={1} aria-valuemax={steps.length} aria-valuenow={step + 1}>
-          <div style={{ width: `${((step + 1) / steps.length) * 100}%` }} />
+        <div className="progress" role="progressbar" aria-valuemin={1} aria-valuemax={projected} aria-valuenow={step + 1}>
+          <div style={{ width: `${((step + 1) / projected) * 100}%` }} />
         </div>
-        <p className="step-no">Pertanyaan {step + 1} dari {steps.length}</p>
+        <p className="step-no">Pertanyaan {step + 1} dari {projected}</p>
         <h2 className="q">{s.question}</h2>
         <div className="opts">
-          {s.options.map((o) => (
+          {optionsOf(s, answers).map((o) => (
             <button
               key={o.value}
               className={`opt${o.unsure ? " unsure" : ""}${answers[s.key] === o.value ? " picked" : ""}`}
@@ -126,7 +174,7 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
 
   const r = result!;
   const a = answers as Answers;
-  const label = (k: Key) => steps.find((s) => s.key === k)!.options.find((o) => o.value === a[k])?.label ?? "-";
+  const label = (st: Step) => optionsOf(st, answers).find((o) => o.value === a[st.key])?.label ?? "-";
   return (
     <section className="wiz wide">
       <div className="bar">
@@ -134,7 +182,7 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
         <ViewToggle view={view} onChange={onViewChange} />
       </div>
       <p className="summary">
-        {steps.map((s) => label(s.key)).join(" · ")}
+        {steps.map(label).join(" · ")}
       </p>
       {!r.primary ? (
         <p className="state">{r.message} Coba ubah jawabanmu, misalnya anggaran atau durasi.</p>
@@ -147,13 +195,19 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
                 item: r.primary.item,
                 rows: ["kuota", "masa"],
                 showPricePerGb: true,
-                highlight: { text: a.priority === "cheapest" ? "Paling Hemat Tunai" : "Paling Pas Dengan Kebutuhanmu", tone: "main" },
+                highlight: {
+                  text: scheme === "unlimited" ? "Paling Hemat per Hari" : a.priority === "cheapest" ? "Paling Hemat Tunai" : "Paling Pas Dengan Kebutuhanmu",
+                  tone: "main",
+                },
               },
               r.secondary && {
                 item: r.secondary.item,
                 rows: ["kuota", "masa"],
                 showPricePerGb: true,
-                highlight: { text: compareBadge(r.primary, r.secondary, rupiah), tone: "alt" },
+                highlight: {
+                  text: scheme === "unlimited" ? compareUnlimitedBadge(r.primary, r.secondary, rupiah) : compareBadge(r.primary, r.secondary, rupiah),
+                  tone: "alt",
+                },
               },
             ].filter(Boolean) as Entry[]
           }

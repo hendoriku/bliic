@@ -33,3 +33,15 @@ test("rekomendasi tidak pernah memilih item tanpa kuota/masa aktif (tagihan, pul
     }
   }
 });
+
+test("skema unlimited pada data asli: hasil selalu unlimited murni dan sesuai operator", () => {
+  const base: Answers = { operator: "", phone: "ya", scheme: "unlimited", hotspot: "tidak_yakin", duration: "tidak_yakin", usage: "tidak_yakin", budget: "tidak_yakin", priority: "tidak_yakin" };
+  for (const operator of new Set(items.map((i) => i.operator))) {
+    const r = getRecommendations(items, { ...base, operator });
+    for (const p of [r.primary, r.secondary]) {
+      if (!p) continue;
+      assert.equal(p.item.operator, operator);
+      assert.equal(p.item.volumeGb, null);
+    }
+  }
+});

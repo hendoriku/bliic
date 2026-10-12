@@ -1,7 +1,8 @@
 // Baris detail pada kartu. Untuk menambah/menghapus/mengganti label detail,
 // ubah DETAILS di sini lalu pilih baris mana yang tampil lewat prop `rows` pada <PackageCard>.
 import type { IbpItem } from "../api/ibp.ts";
-import { days, gb, rupiahPrecise } from "../format.ts";
+import { gb, rupiahPrecise } from "../format.ts";
+import { durationLabel, isUnlimited } from "../domain/unlimited.ts";
 import { unitCost } from "../recommend.ts";
 
 export type DetailKey = "kuota" | "masa" | "perGbHari";
@@ -13,8 +14,8 @@ interface DetailDef {
 }
 
 export const DETAILS: Record<DetailKey, DetailDef> = {
-  kuota: { label: "Kuota", value: (i) => gb(i.volumeGb) },
-  masa: { label: "Masa aktif", value: (i) => days(i.validityDays) },
+  kuota: { label: "Kuota", value: (i) => (isUnlimited(i) ? "Unlimited" : gb(i.volumeGb)) },
+  masa: { label: "Masa aktif", value: durationLabel },
   perGbHari: {
     label: "Per GB/hari",
     value: (i) => {

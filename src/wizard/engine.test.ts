@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { normalizeItem } from "../api/ibp.ts";
-import { getRecommendations, type Answers } from "./engine.ts";
+import { countUnlimited, getRecommendations, type Answers } from "./engine.ts";
 
 const mk = (o: Record<string, unknown>) =>
   normalizeItem({ name: "Paket", operator: "AXIS", available: true, ...o })!;
@@ -87,4 +87,50 @@ test("tidak ada hasil -> pesan", () => {
   const r = getRecommendations(items, { ...base, operator: "XL" });
   assert.equal(r.primary, null);
   assert.ok(r.message);
+});
+
+// ---- skema unlimited ----
+const unl = [
+  mk({ code: "U1", name: "Paket Unlimited 24 Jam", catalogue: "data-package", price: 11500, validity_days: 1 }),
+  mk({ code: "U3", name: "Paket Unlimited 72 Jam", catalogue: "data-package", price: 27000, validity_days: 3 }),
+  mk({ code: "UJ", name: "Paket Warnet Unlimited 1 Jam", catalogue: "data-package", price: 4000 }),
+  mk({ code: "UM", name: "Paket Unlimited 28D", catalogue: "data-package", price: 98000 }),
+  mk({ code: "V1", name: "Paket 5GB", catalogue: "data-package", price: 9000, volume_gb: 5, validity_days: 1 }),
+];
+const uBase: Answers = { ...base, scheme: "unlimited", hotspot: "ya" };
+
+test("countUnlimited menghitung unlimited murni per operator dan jawaban nomor HP", () => {
+  assert.equal(countUnlimited(unl, "AXIS", "ya"), 4);
+  assert.equal(countUnlimited(unl, "AXIS", "tidak"), 0); // semuanya data-package
+  assert.equal(countUnlimited(unl, "XL", "ya"), 0);
+});
+
+test("unlimited: opsi utama = paling hemat per hari, opsi kedua = paling murah tunai", () => {
+  const r = getRecommendations(unl, uBase);
+  // per hari: U1 11.500, U3 9.000, UM 3.500 -> UM; UJ (1 jam, 4.000) ikut kena filter hotspot "ya" (Warnet)
+  assert.equal(r.primary?.item.code, "UM");
+  assert.equal(r.secondary?.item.code, "U1"); // termurah tunai selain utama (UJ dikeluarkan karena Warnet)
+});
+
+test("unlimited: durasi 1 hari hanya memilih paket berdurasi tepat 1 hari", () => {
+  const r = getRecommendations(unl, { ...uBase, duration: "1" });
+  assert.equal(r.primary?.item.code, "U1");
+  assert.equal(r.secondary, null);
+});
+
+test("unlimited: budget membatasi, paket kuota biasa tidak ikut", () => {
+  const r = getRecommendations(unl, { ...uBase, budget: "lt10", hotspot: "tidak_yakin" });
+  assert.equal(r.primary?.item.code, "UJ"); // satu-satunya <= 10.000 (Warnet, tapi hotspot tidak yakin hanya mendegradasi)
+  assert.ok(![r.primary, r.secondary].some((p) => p?.item.code === "V1"));
+});
+
+test("unlimited: tidak ada hasil -> pesan", () => {
+  const r = getRecommendations(unl, { ...uBase, operator: "XL" });
+  assert.equal(r.primary, null);
+  assert.ok(r.message);
+});
+
+test("skema volume tidak pernah menampilkan unlimited murni", () => {
+  const r = getRecommendations(unl, { ...base, scheme: "volume", hotspot: "ya" });
+  assert.equal(r.primary?.item.code, "V1");
 });
