@@ -87,7 +87,9 @@ dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
 .rate { display: block; color: var(--muted); font-size: 12px; }
 .wiz-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
 .btn.ghost { background: none; color: var(--brand); border: 1px solid var(--brand); cursor: pointer; font: inherit; font-weight: 600; }
-.bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 4px 0 10px; }
+.bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 12px; margin: 4px 0 10px; }
+.bar > h2 { flex: 1 1 11rem; min-width: 0; }
+.bar .seg { flex: 0 0 auto; margin-left: auto; }
 .bar .count { margin: 0; }
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
 .seg button { border: 0; background: none; color: var(--muted); padding: 7px 14px; font: inherit; cursor: pointer; }
@@ -175,3 +177,4 @@ dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
   }
   .c-buy { justify-self: end; }
 }
+.form + .bar { margin-top: 22px; }
