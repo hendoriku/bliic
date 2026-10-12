@@ -1,4 +1,5 @@
 // Tampilan "Daftar": satu baris per paket, padat dan mudah dipindai.
+import { memo } from "react";
 import { rupiahPrecise, rupiah } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
 import { BadgeChip } from "./BadgeChip.tsx";
@@ -9,7 +10,7 @@ import { cleanTitle } from "../presentation/title.ts";
 
 const ROWS: DetailKey[] = ["kuota", "masa", "perGbHari"];
 
-export function PackageRow({ entry }: { entry: Entry }) {
+export const PackageRow = memo(function PackageRow({ entry }: { entry: Entry }) {
   const { item, highlight, note } = entry;
   const badges = badgesFor(item);
   const perGb = entry.showPricePerGb ? pricePerGb(item) : null;
@@ -43,4 +44,4 @@ export function PackageRow({ entry }: { entry: Entry }) {
       </div>
     </div>
   );
-}
+});

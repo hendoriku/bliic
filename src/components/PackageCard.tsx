@@ -1,5 +1,6 @@
 // Satu-satunya komponen kartu paket: dipakai oleh Katalog, Rekomendasi, dan Bantu Pilih.
 // Variasi tampilan dikendalikan lewat props, bukan dengan menyalin komponen.
+import { memo } from "react";
 import type { IbpItem } from "../api/ibp.ts";
 import { rupiah, rupiahPrecise } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
@@ -22,7 +23,7 @@ export interface PackageCardProps {
 
 const DEFAULT_ROWS: DetailKey[] = ["kuota", "masa", "perGbHari"];
 
-export function PackageCard({ item, rows = DEFAULT_ROWS, highlight, note, showPricePerGb = false }: PackageCardProps) {
+export const PackageCard = memo(function PackageCard({ item, rows = DEFAULT_ROWS, highlight, note, showPricePerGb = false }: PackageCardProps) {
   const badges = badgesFor(item);
   const perGb = showPricePerGb ? pricePerGb(item) : null;
   const details = rows
@@ -58,4 +59,4 @@ export function PackageCard({ item, rows = DEFAULT_ROWS, highlight, note, showPr
       </div>
     </article>
   );
-}
+});

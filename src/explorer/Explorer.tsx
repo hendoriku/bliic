@@ -22,12 +22,14 @@ export function Explorer({ items, view, onViewChange }: { items: IbpItem[]; view
         (i) =>
           (!op || i.operator === op) &&
           (!onlyAvail || i.available) &&
-          (!needle || i.name.toLowerCase().includes(needle) || i.code.toLowerCase().includes(needle)),
+          (!needle || i.search.includes(needle)),
       ),
       sort,
     );
   }, [items, op, deferredQ, onlyAvail, sort]);
 
+  // Referensi stabil agar baris yang sudah dirender tidak dihitung ulang (memo).
+  const entries = useMemo(() => shown.map((item) => ({ item })), [shown]);
   const presetId = presetIdOf(sort);
 
   return (
@@ -62,7 +64,7 @@ export function Explorer({ items, view, onViewChange }: { items: IbpItem[]; view
         <ViewToggle view={view} onChange={onViewChange} />
       </div>
 
-      <ItemsView entries={shown.map((item) => ({ item }))} view={view} sort={sort} onSort={setSort} />
+      <ItemsView entries={entries} view={view} sort={sort} onSort={setSort} />
 
       {shown.length === 0 && <p className="state">Tidak ada paket yang cocok.</p>}
     </section>

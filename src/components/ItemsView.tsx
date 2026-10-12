@@ -11,7 +11,7 @@ import type { Sort } from "../explorer/sort.ts";
 import type { Entry, View } from "../view.ts";
 import { PackageCard } from "./PackageCard.tsx";
 import { PackageRow } from "./PackageRow.tsx";
-import { PackageTableCells, PackageTableHead, TABLE_COLS } from "./PackageTable.tsx";
+import { PackageTableHead, PackageTableRow, TABLE_COLS } from "./PackageTable.tsx";
 
 interface Props {
   entries: Entry[];
@@ -54,7 +54,7 @@ export function ItemsView({ entries, view, sort, onSort }: Props) {
   const virt = useWindowVirtualizer({
     count: rowCount,
     estimateSize: () => estimate(view),
-    overscan: 6,
+    overscan: 4,
     scrollMargin: margin,
   });
 
@@ -129,16 +129,13 @@ export function ItemsView({ entries, view, sort, onSort }: Props) {
           <tbody ref={setBox} onKeyDown={onKeyDown}>
             {padTop > 0 && <tr aria-hidden className="spacer" style={{ height: padTop }}><td colSpan={TABLE_COLS} /></tr>}
             {rows.map((v) => (
-              <tr
+              <PackageTableRow
                 key={entries[v.index].item.code}
-                data-index={v.index}
-                data-item={v.index}
-                ref={virt.measureElement}
-                tabIndex={v.index === active ? 0 : -1}
-                className={`${entries[v.index].item.available ? "" : "off "}${v.index === active ? "active" : ""}`}
-              >
-                <PackageTableCells entry={entries[v.index]} />
-              </tr>
+                entry={entries[v.index]}
+                index={v.index}
+                active={v.index === active}
+                measure={virt.measureElement}
+              />
             ))}
             {padBottom > 0 && <tr aria-hidden className="spacer" style={{ height: padBottom }}><td colSpan={TABLE_COLS} /></tr>}
           </tbody>

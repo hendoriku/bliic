@@ -27,6 +27,7 @@
     "@capacitor/browser": "^8.0.5",
     "@capacitor/core": "^8.5.3",
     "@tanstack/react-virtual": "^3.14.14",
+    "idb-keyval": "^6.3.0",
     "lucide-react": "^1.55.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"

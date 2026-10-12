@@ -1,8 +1,8 @@
 import { Calculator, Library, RefreshCw, WandSparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { ApiClient } from "./api/client.ts";
-import { isFresh, readCache } from "./api/cache.ts";
-import { fetchIbp, parseIbp, type IbpItem, type IbpResult } from "./api/ibp.ts";
+import { isFresh, readCache, writeCache } from "./api/cache.ts";
+import { fetchIbpConditional, type IbpItem } from "./api/ibp.ts";
 import { ItemsView } from "./components/ItemsView.tsx";
 import { ViewToggle } from "./components/ViewToggle.tsx";
 import { usePersistentState } from "./hooks.ts";
@@ -18,7 +18,7 @@ const client = new ApiClient({
 
 type Load =
   | { kind: "loading" }
-  | { kind: "ok"; data: IbpResult; at: number; refreshing: boolean; notice?: string }
+  | { kind: "ok"; items: IbpItem[]; at: number; refreshing: boolean; notice?: string }
   | { kind: "error"; message: string };
 type Tab = "katalog" | "rekomendasi" | "bantu";
 
@@ -28,28 +28,39 @@ export function App() {
   // Pilihan tampilan dipakai bersama oleh semua tab dan diingat antar kunjungan.
   const [view, setView] = usePersistentState<View>(VIEW_STORAGE_KEY, "tabel", VIEWS);
 
-  // Stale-while-revalidate: tampilkan cache dulu, segarkan di latar bila sudah kedaluwarsa (atau dipaksa).
-  const reload = (force = false) => {
-    const cached = readCache();
-    const shown = cached ? parseIbp(cached.json) : null;
-    if (cached && shown && shown.items.length > 0) {
+  // Stale-while-revalidate: tampilkan cache dulu (dibaca asinkron dari IndexedDB, tanpa memblokir render),
+  // lalu segarkan di latar dengan permintaan bersyarat (ETag): bila data tidak berubah server menjawab 304 tanpa isi.
+  const reload = async (force = false) => {
+    const cached = await readCache();
+    if (cached && cached.items.length > 0) {
       const fresh = isFresh(cached) && !force;
-      setLoad({ kind: "ok", data: shown, at: cached.at, refreshing: !fresh });
+      setLoad({ kind: "ok", items: cached.items, at: cached.at, refreshing: !fresh });
       if (fresh) return;
     } else {
       setLoad({ kind: "loading" });
     }
-    fetchIbp(client)
-      .then((data) => setLoad({ kind: "ok", data, at: Date.now(), refreshing: false }))
-      .catch((err) =>
-        setLoad((cur) =>
-          cur.kind === "ok"
-            ? { ...cur, refreshing: false, notice: "Gagal menyegarkan, menampilkan data tersimpan." }
-            : { kind: "error", message: String(err) },
-        ),
+    try {
+      const res = await fetchIbpConditional(client, cached?.etag ?? null);
+      const now = Date.now();
+      if (res.status === "not-modified" && cached) {
+        void writeCache({ ...cached, at: now });
+        // Data identik: pertahankan referensi `items` agar tidak ada render ulang daftar.
+        setLoad((cur) => (cur.kind === "ok" ? { ...cur, at: now, refreshing: false, notice: undefined } : cur));
+      } else if (res.status === "ok") {
+        void writeCache({ at: now, etag: res.etag, items: res.items });
+        setLoad({ kind: "ok", items: res.items, at: now, refreshing: false });
+      }
+    } catch (err) {
+      setLoad((cur) =>
+        cur.kind === "ok"
+          ? { ...cur, refreshing: false, notice: "Gagal menyegarkan, menampilkan data tersimpan." }
+          : { kind: "error", message: String(err) },
       );
+    }
   };
-  useEffect(() => reload(), []);
+  useEffect(() => {
+    void reload();
+  }, []);
 
   return (
     <div className="app">
@@ -72,19 +83,19 @@ export function App() {
           <div className="state error" role="alert">
             <p>Gagal memuat data paket.</p>
             <small>{load.message}</small>
-            <button className="tbtn" onClick={() => reload(true)}><RefreshCw size={15} aria-hidden />Coba lagi</button>
+            <button className="tbtn" onClick={() => void reload(true)}><RefreshCw size={15} aria-hidden />Coba lagi</button>
           </div>
         )}
         {load.kind === "ok" && (
           <>
-            {tab === "katalog" && <Explorer items={load.data.items} view={view} onViewChange={setView} />}
-            {tab === "rekomendasi" && <Recommend items={load.data.items} view={view} onViewChange={setView} />}
-            {tab === "bantu" && <Wizard items={load.data.items} view={view} onViewChange={setView} />}
+            {tab === "katalog" && <Explorer items={load.items} view={view} onViewChange={setView} />}
+            {tab === "rekomendasi" && <Recommend items={load.items} view={view} onViewChange={setView} />}
+            {tab === "bantu" && <Wizard items={load.items} view={view} onViewChange={setView} />}
             <p className="updated">
               {load.refreshing ? "Menyegarkan data…" : `Data diperbarui ${new Date(load.at).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })}`}
               {load.notice && <> · <span className="warn">{load.notice}</span></>}
               {" "}
-              <button className="tbtn sm" disabled={load.refreshing} onClick={() => reload(true)}>
+              <button className="tbtn sm" disabled={load.refreshing} onClick={() => void reload(true)}>
                 <RefreshCw size={13} className={load.refreshing ? "spin" : undefined} aria-hidden />
                 Segarkan
               </button>

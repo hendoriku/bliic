@@ -54,7 +54,11 @@ export class ApiClient {
   }
 
   /** GET tanpa interpretasi skema: berguna untuk menyelidiki respons asli. */
-  async getRaw(path: string, query?: Record<string, string | number>): Promise<RawResponse> {
+  async getRaw(
+    path: string,
+    query?: Record<string, string | number>,
+    extraHeaders?: Record<string, string>,
+  ): Promise<RawResponse> {
     const url = this.resolve(path);
     for (const [k, v] of Object.entries(query ?? {})) url.searchParams.set(k, String(v));
 
@@ -66,6 +70,7 @@ export class ApiClient {
           headers: {
             Accept: "application/json",
             ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
+            ...extraHeaders,
           },
           signal: AbortSignal.timeout(this.timeoutMs),
         });

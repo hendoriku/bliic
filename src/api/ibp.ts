@@ -1,5 +1,4 @@
-import type { ApiClient } from "./client.ts";
-import { writeCache } from "./cache.ts";
+import { ApiError, type ApiClient } from "./client.ts";
 
 export const IBP_PATH = "/catalogue/ibp";
 
@@ -19,6 +18,10 @@ export interface IbpItem {
   isWorthIt: boolean;
   badges: string[];
   buyUrl: string | null;
+  /** Biaya per GB per hari (dari API, atau dihitung sendiri). Dihitung sekali saat data masuk. */
+  unit: number | null;
+  /** Teks pencarian huruf kecil (nama + kode). Dihitung sekali saat data masuk, bukan tiap ketikan. */
+  search: string;
 }
 
 export interface IbpResult {
@@ -50,22 +53,28 @@ export function normalizeItem(raw: unknown): IbpItem | null {
   const code = str(o.code);
   const price = num(o.price);
   if (!code || price === null) return null;
+  const name = str(o.name, code).replace(/\s+/g, " ").trim();
+  const volumeGb = num(o.volume_gb);
+  const validityDays = num(o.validity_days);
+  const ratePerGbDay = num(o.rate_per_gb_day);
   return {
     code,
-    name: str(o.name, code).replace(/\s+/g, " ").trim(),
+    name,
     catalogue: str(o.catalogue, "lainnya"),
     operator: str(o.operator, "-"),
     price,
     priceType: str(o.price_type, "fixed"),
     currency: str(o.currency, "IDR"),
     available: o.available !== false,
-    volumeGb: num(o.volume_gb),
-    validityDays: num(o.validity_days),
-    ratePerGbDay: num(o.rate_per_gb_day),
+    volumeGb,
+    validityDays,
+    ratePerGbDay,
     isSmartPick: o.is_smart_pick === true,
     isWorthIt: o.is_worth_it === true,
     badges: Array.isArray(o.badges) ? o.badges.map(badgeLabel) : [],
     buyUrl: typeof o.buy_url === "string" ? o.buy_url : null,
+    unit: ratePerGbDay !== null ? ratePerGbDay : volumeGb && validityDays ? price / volumeGb / validityDays : null,
+    search: `${name} ${code}`.toLowerCase(),
   };
 }
 
@@ -143,9 +152,29 @@ export async function fetchAllPages(client: ApiClient, path = IBP_PATH): Promise
   return { ...root, data, _pages: pages };
 }
 
-/** Ambil semua halaman dari jaringan dan simpan ke cache. */
+/** Ambil semua halaman dari jaringan. */
 export async function fetchIbp(client: ApiClient): Promise<IbpResult> {
-  const json = await fetchAllPages(client);
-  writeCache(json);
-  return parseIbp(json);
+  return parseIbp(await fetchAllPages(client));
+}
+
+export type ConditionalResult =
+  | { status: "not-modified" }
+  | { status: "ok"; items: IbpItem[]; etag: string | null };
+
+/**
+ * Penyegaran hemat: kirim ETag yang tersimpan (If-None-Match). Jika data tidak berubah server menjawab 304
+ * tanpa isi, jadi tidak ada unduhan, parsing, maupun render ulang. ETag hanya disimpan untuk respons satu halaman
+ * (bila API berhalaman, seluruh halaman diambil dan ETag dibuang karena hanya mewakili halaman pertama).
+ */
+export async function fetchIbpConditional(client: ApiClient, etag: string | null): Promise<ConditionalResult> {
+  const first = await client.getRaw(IBP_PATH, undefined, etag ? { "If-None-Match": etag } : undefined);
+  if (first.status === 304) return { status: "not-modified" };
+  if (first.status < 200 || first.status >= 300) {
+    throw new ApiError(`HTTP ${first.status} untuk ${IBP_PATH}`, first.status, first.text.slice(0, 500));
+  }
+  if (first.json === null) throw new ApiError(`Respons ${IBP_PATH} bukan JSON`, first.status, first.text.slice(0, 500));
+  const root = obj(first.json);
+  const paged = nextUrl(root) !== null || (lastPage(root) ?? 1) > currentPage(root);
+  if (paged) return { status: "ok", items: parseIbp(await fetchAllPages(client)).items, etag: null };
+  return { status: "ok", items: parseIbp(first.json).items, etag: first.headers["etag"] ?? null };
 }

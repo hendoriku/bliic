@@ -13,12 +13,8 @@ export interface Recommendation {
   reason?: string;
 }
 
-/** Biaya per GB per hari: pakai nilai dari API, atau hitung sendiri bila datanya lengkap. */
-export function unitCost(i: IbpItem): number | null {
-  if (i.ratePerGbDay !== null) return i.ratePerGbDay;
-  if (i.volumeGb && i.validityDays) return i.price / i.volumeGb / i.validityDays;
-  return null;
-}
+/** Biaya per GB per hari (sudah dihitung sekali saat data masuk). */
+export const unitCost = (i: IbpItem): number | null => i.unit;
 
 export function matches(i: IbpItem, n: Need): boolean {
   if (!i.available) return false;

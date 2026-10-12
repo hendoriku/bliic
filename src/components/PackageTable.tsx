@@ -1,5 +1,6 @@
 // Potongan tabel: header (bisa diklik untuk mengurutkan) dan satu baris data.
 // Penyusunan <table> dan virtualisasinya ada di ItemsView.
+import { memo } from "react";
 import { rupiah } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
 import { BadgeChip } from "./BadgeChip.tsx";
@@ -53,7 +54,7 @@ export function PackageTableHead({ sort, onSort }: { sort?: Sort; onSort?: (s: S
  * Isi sel-sel satu baris (elemen <tr>-nya disediakan ItemsView agar bisa diukur dan difokuskan).
  * Kelas "c-*" dan atribut data-label dipakai CSS untuk menata ulang baris menjadi blok bertumpuk di layar HP.
  */
-export function PackageTableCells({ entry: { item: i, highlight, note } }: { entry: Entry }) {
+function PackageTableCells({ entry: { item: i, highlight, note } }: { entry: Entry }) {
   return (
     <>
       <td className="op c-op">{i.operator}</td>
@@ -74,3 +75,25 @@ export function PackageTableCells({ entry: { item: i, highlight, note } }: { ent
     </>
   );
 }
+
+/**
+ * Satu baris tabel. Dibungkus memo: saat scroll hanya baris baru yang dirender, baris lain dilewati
+ * (props stabil: entry tidak berubah, `active` hanya berubah pada dua baris saat navigasi keyboard).
+ */
+export const PackageTableRow = memo(function PackageTableRow({
+  entry,
+  index,
+  active,
+  measure,
+}: {
+  entry: Entry;
+  index: number;
+  active: boolean;
+  measure: (el: Element | null) => void;
+}) {
+  return (
+    <tr data-index={index} data-item={index} ref={measure} tabIndex={active ? 0 : -1} className={entry.item.available ? undefined : "off"}>
+      <PackageTableCells entry={entry} />
+    </tr>
+  );
+});
