@@ -1,6 +1,8 @@
 // Tampilan "Daftar": satu baris per paket, padat dan mudah dipindai.
 import { rupiahPrecise, rupiah } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
+import { BadgeChip } from "./BadgeChip.tsx";
+import { BuyButton } from "./BuyButton.tsx";
 import { DETAILS, pricePerGb, type DetailKey } from "../presentation/details.ts";
 import type { Entry } from "../view.ts";
 import { cleanTitle } from "../presentation/title.ts";
@@ -22,7 +24,7 @@ export function PackageRow({ entry }: { entry: Entry }) {
         <h3>{cleanTitle(item.name)}</h3>
         {badges.length > 0 && (
           <ul className="badges">
-            {badges.map((b) => <li key={b.key} className={`b ${b.tone}`}>{b.label}</li>)}
+            {badges.map((b) => <BadgeChip key={b.key} badge={b} />)}
           </ul>
         )}
         <p className="row-details">
@@ -37,11 +39,7 @@ export function PackageRow({ entry }: { entry: Entry }) {
       <div className="row-buy">
         <strong>{rupiah(item.price)}</strong>
         {perGb !== null && <small className="rate">≈ {rupiahPrecise(perGb)}/GB</small>}
-        {item.available && item.buyUrl ? (
-          <a className="btn" href={item.buyUrl} target="_blank" rel="noopener noreferrer">Beli</a>
-        ) : (
-          <span className="btn disabled">{item.available ? "Beli" : "Habis"}</span>
-        )}
+        <BuyButton item={item} />
       </div>
     </div>
   );

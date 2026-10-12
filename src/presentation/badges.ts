@@ -4,16 +4,19 @@
 import type { IbpItem } from "../api/ibp.ts";
 
 export type Tone = "brand" | "good" | "neutral";
+/** Nama ikon; pemetaannya ke komponen ada di components/BadgeChip.tsx. */
+export type BadgeIcon = "sparkles" | "check";
 export interface Badge {
   key: string;
   label: string;
   tone: Tone;
+  icon?: BadgeIcon;
 }
 
 /** Daftar lencana yang dikenal. Urutan di sini = urutan tampil. Tambah/ubah label di sini. */
-const KNOWN: Record<string, { label: string; tone: Tone }> = {
-  smart_pick: { label: "Smart Pick", tone: "brand" },
-  worth_it: { label: "Worth It", tone: "good" },
+const KNOWN: Record<string, { label: string; tone: Tone; icon?: BadgeIcon }> = {
+  smart_pick: { label: "Smart Pick", tone: "brand", icon: "sparkles" },
+  worth_it: { label: "Worth It", tone: "good", icon: "check" },
 };
 
 /** "Smart Pick", "smart-pick", "SMART_PICK" -> "smart_pick" */
@@ -38,5 +41,5 @@ export function badgesFor(item: Pick<IbpItem, "isSmartPick" | "isWorthIt" | "bad
       const ib = order.indexOf(b);
       return (ia === -1 ? order.length : ia) - (ib === -1 ? order.length : ib);
     })
-    .map((key) => ({ key, label: KNOWN[key]?.label ?? humanize(key), tone: KNOWN[key]?.tone ?? "neutral" }));
+    .map((key) => ({ key, label: KNOWN[key]?.label ?? humanize(key), tone: KNOWN[key]?.tone ?? "neutral", icon: KNOWN[key]?.icon }));
 }

@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import { useDeferredValue, useMemo, useState } from "react";
 import type { IbpItem } from "../api/ibp.ts";
 import { ItemsView } from "../components/ItemsView.tsx";
@@ -32,7 +33,10 @@ export function Explorer({ items, view, onViewChange }: { items: IbpItem[]; view
   return (
     <section>
       <div className="filters">
-        <input type="search" placeholder="Cari paket atau kode…" value={q} onChange={(e) => setQ(e.target.value)} />
+        <label className="search">
+          <Search size={16} aria-hidden />
+          <input type="search" placeholder="Cari paket atau kode…" aria-label="Cari paket atau kode" value={q} onChange={(e) => setQ(e.target.value)} />
+        </label>
         <select value={op} onChange={(e) => setOp(e.target.value)} aria-label="Operator">
           <option value="">Semua operator</option>
           {ops.map((o) => <option key={o}>{o}</option>)}

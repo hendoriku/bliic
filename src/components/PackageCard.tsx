@@ -3,6 +3,8 @@
 import type { IbpItem } from "../api/ibp.ts";
 import { rupiah, rupiahPrecise } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
+import { BadgeChip } from "./BadgeChip.tsx";
+import { BuyButton } from "./BuyButton.tsx";
 import { DETAILS, pricePerGb, type DetailKey } from "../presentation/details.ts";
 import { cleanTitle } from "../presentation/title.ts";
 
@@ -36,9 +38,7 @@ export function PackageCard({ item, rows = DEFAULT_ROWS, highlight, note, showPr
       <h3>{cleanTitle(item.name)}</h3>
       {badges.length > 0 && (
         <ul className="badges" aria-label="Lencana">
-          {badges.map((b) => (
-            <li key={b.key} className={`b ${b.tone}`}>{b.label}</li>
-          ))}
+          {badges.map((b) => <BadgeChip key={b.key} badge={b} />)}
         </ul>
       )}
       {details.length > 0 && (
@@ -54,11 +54,7 @@ export function PackageCard({ item, rows = DEFAULT_ROWS, highlight, note, showPr
           <strong>{rupiah(item.price)}</strong>
           {perGb !== null && <small className="rate">≈ {rupiahPrecise(perGb)}/GB</small>}
         </div>
-        {item.available && item.buyUrl ? (
-          <a className="btn" href={item.buyUrl} target="_blank" rel="noopener noreferrer">Beli</a>
-        ) : (
-          <span className="btn disabled">{item.available ? "Beli" : "Tidak tersedia"}</span>
-        )}
+        <BuyButton item={item} />
       </div>
     </article>
   );

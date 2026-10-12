@@ -2,6 +2,8 @@
 // Penyusunan <table> dan virtualisasinya ada di ItemsView.
 import { rupiah } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
+import { BadgeChip } from "./BadgeChip.tsx";
+import { BuyButton } from "./BuyButton.tsx";
 import { DETAILS } from "../presentation/details.ts";
 import { cleanTitle } from "../presentation/title.ts";
 import { defaultDir, type Sort, type SortKey } from "../explorer/sort.ts";
@@ -60,7 +62,7 @@ export function PackageTableCells({ entry: { item: i, highlight, note } }: { ent
         <div className="t-name">{cleanTitle(i.name)}</div>
         <div className="t-sub">
           <span className="code">{i.code}</span>
-          {badgesFor(i).map((b) => <span key={b.key} className={`b ${b.tone}`}>{b.label}</span>)}
+          {badgesFor(i).map((b) => <BadgeChip key={b.key} badge={b} as="span" />)}
         </div>
         {note && <div className="t-note">{note}</div>}
       </td>
@@ -68,13 +70,7 @@ export function PackageTableCells({ entry: { item: i, highlight, note } }: { ent
       <td className="r c-masa" data-label="Masa aktif">{DETAILS.masa.value(i)}</td>
       <td className="r c-rate" data-label="Per GB/hari">{DETAILS.perGbHari.value(i) ?? "—"}</td>
       <td className="r c-price"><strong>{rupiah(i.price)}</strong></td>
-      <td className="r c-buy">
-        {i.available && i.buyUrl ? (
-          <a className="btn sm" href={i.buyUrl} target="_blank" rel="noopener noreferrer">Beli</a>
-        ) : (
-          <span className="btn sm disabled">{i.available ? "Beli" : "Habis"}</span>
-        )}
-      </td>
+      <td className="r c-buy"><BuyButton item={i} small /></td>
     </>
   );
 }

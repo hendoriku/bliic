@@ -61,11 +61,8 @@ dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
 .h2 { font-size: 17px; margin: 20px 0 10px; }
 .state { text-align: center; color: var(--muted); padding: 32px 8px; }
 .state.error { color: var(--warn); } .state button { margin-top: 8px; padding: 8px 16px; }
-.debug { margin-top: 28px; color: var(--muted); font-size: 12px; } .debug pre { overflow: auto; background: var(--surface); padding: 10px; border-radius: 8px; }
 .updated { margin: 20px 0 0; font-size: 12px; color: var(--muted); }
 .updated .warn { color: var(--warn); }
-.link { background: none; border: 0; padding: 0; color: var(--brand); font: inherit; cursor: pointer; text-decoration: underline; }
-.link:disabled { opacity: .5; cursor: default; }
 .wiz { max-width: 560px; margin: 0 auto; }
 .progress { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
 .progress div { height: 100%; background: var(--brand); transition: width .25s; }
@@ -178,3 +175,31 @@ dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
   .c-buy { justify-self: end; }
 }
 .form + .bar { margin-top: 22px; }
+
+/* ---- Ikon (lucide) dan tombol teks tanpa garis bawah ---- */
+.top h1 { display: flex; align-items: center; gap: 8px; }
+.top h1 .logo { border-radius: 7px; flex: none; }
+.tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.b { display: inline-flex; align-items: center; gap: 4px; }
+.tbtn { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; padding: 7px 10px; margin-left: -10px; border-radius: 10px; color: var(--brand); font: inherit; font-weight: 600; cursor: pointer; transition: background .15s; }
+.tbtn:hover:not(:disabled) { background: var(--chip); }
+.tbtn:disabled { opacity: .55; cursor: default; }
+.tbtn.sm { padding: 3px 8px; margin-left: 0; font-size: 12px; font-weight: 600; }
+.tbtn:focus-visible, .btn:focus-visible, .seg button:focus-visible, .tabs button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.updated { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; }
+.spin { animation: spin .9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+.seg button { display: inline-flex; align-items: center; gap: 6px; }
+@media (max-width: 380px) { .seg-text { display: none; } .seg button { padding: 8px 14px; } }
+.search { position: relative; display: block; }
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.search input { padding-left: 38px; }
+.wiz-actions .tbtn { margin-left: -10px; }
+@media (max-width: 380px) {
+  .tabs button { padding: 10px 4px; font-size: 14px; min-width: 0; }
+  .tabs button svg { display: none; } /* ikon tab disembunyikan agar tiga tab muat di layar sangat sempit */
+}
+.tabs button { flex: 1 1 auto; white-space: nowrap; }
+@media (max-width: 440px) { .tabs button { padding: 10px 6px; gap: 5px; } }

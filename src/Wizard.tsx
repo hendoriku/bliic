@@ -1,3 +1,4 @@
+import { ArrowLeft, RotateCcw, Undo2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { IbpItem } from "./api/ibp.ts";
 import { ItemsView } from "./components/ItemsView.tsx";
@@ -127,7 +128,7 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
             </button>
           ))}
         </div>
-        {step > 0 && <button className="link back" onClick={() => setStep(step - 1)}>← Kembali</button>}
+        {step > 0 && <button className="tbtn back" onClick={() => setStep(step - 1)}><ArrowLeft size={16} aria-hidden />Kembali</button>}
       </section>
     );
   }
@@ -175,8 +176,8 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
       )}
       {entries.length > 0 && <ItemsView view={view} entries={entries} />}
       <div className="wiz-actions">
-        <button className="link" onClick={() => setStep(steps.length - 1)}>← Ubah jawaban terakhir</button>
-        <button className="btn ghost" onClick={reset}>Mulai lagi</button>
+        <button className="tbtn" onClick={() => setStep(steps.length - 1)}><Undo2 size={16} aria-hidden />Ubah jawaban terakhir</button>
+        <button className="btn ghost" onClick={reset}><RotateCcw size={15} aria-hidden />Mulai lagi</button>
       </div>
     </section>
   );

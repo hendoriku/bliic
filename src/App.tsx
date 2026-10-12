@@ -1,3 +1,4 @@
+import { Calculator, Library, RefreshCw, WandSparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { ApiClient } from "./api/client.ts";
 import { isFresh, readCache } from "./api/cache.ts";
@@ -53,12 +54,15 @@ export function App() {
   return (
     <div className="app">
       <header className="top">
-        <h1>Bli.ic <span>by Babelii</span></h1>
+        <h1>
+          <img className="logo" src={`${import.meta.env.BASE_URL}favicon.png`} alt="" width={28} height={28} />
+          Bli.ic <span>by Babelii</span>
+        </h1>
         <p className="subtitle">Internet Package Calculator</p>
         <nav className="tabs" role="tablist">
-          <button role="tab" aria-selected={tab === "katalog"} onClick={() => setTab("katalog")}>Katalog</button>
-          <button role="tab" aria-selected={tab === "rekomendasi"} onClick={() => setTab("rekomendasi")}>Rekomendasi</button>
-          <button role="tab" aria-selected={tab === "bantu"} onClick={() => setTab("bantu")}>Bantu Pilih</button>
+          <button role="tab" aria-selected={tab === "katalog"} onClick={() => setTab("katalog")}><Library size={16} aria-hidden />Katalog</button>
+          <button role="tab" aria-selected={tab === "rekomendasi"} onClick={() => setTab("rekomendasi")}><Calculator size={16} aria-hidden />Rekomendasi</button>
+          <button role="tab" aria-selected={tab === "bantu"} onClick={() => setTab("bantu")}><WandSparkles size={16} aria-hidden />Bantu Pilih</button>
         </nav>
       </header>
 
@@ -68,7 +72,7 @@ export function App() {
           <div className="state error" role="alert">
             <p>Gagal memuat data paket.</p>
             <small>{load.message}</small>
-            <button onClick={() => reload(true)}>Coba lagi</button>
+            <button className="tbtn" onClick={() => reload(true)}><RefreshCw size={15} aria-hidden />Coba lagi</button>
           </div>
         )}
         {load.kind === "ok" && (
@@ -79,12 +83,12 @@ export function App() {
             <p className="updated">
               {load.refreshing ? "Menyegarkan data…" : `Data diperbarui ${new Date(load.at).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })}`}
               {load.notice && <> · <span className="warn">{load.notice}</span></>}
-              {" "}<button className="link" disabled={load.refreshing} onClick={() => reload(true)}>Segarkan</button>
+              {" "}
+              <button className="tbtn sm" disabled={load.refreshing} onClick={() => reload(true)}>
+                <RefreshCw size={13} className={load.refreshing ? "spin" : undefined} aria-hidden />
+                Segarkan
+              </button>
             </p>
-            <details className="debug">
-              <summary>Info teknis ({load.data.items.length} paket)</summary>
-              <pre>{JSON.stringify(load.data.extra, null, 2)}</pre>
-            </details>
           </>
         )}
       </main>
