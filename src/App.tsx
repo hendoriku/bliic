@@ -92,6 +92,11 @@ export function App() {
           </>
         )}
       </main>
+
+      {/* Mengikuti footer website Babelii: satu baris kecil, rata tengah, warna redup. */}
+      <footer className="foot">
+        <p>&copy; {new Date().getFullYear()} Babelii - Kiosk &amp; PPOB. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
