@@ -22,9 +22,9 @@ interface Props {
 }
 
 // Perkiraan tinggi baris (px) sebelum diukur; diambil dari pengukuran nyata agar total tinggi
-// daftar tidak melompat saat baris-baris selesai diukur. [layar lebar, layar sempit (<600px)]
-const ESTIMATE: Record<View, [number, number]> = { kartu: [214, 190], daftar: [105, 165], tabel: [61, 71] };
-const estimate = (v: View) => ESTIMATE[v][window.innerWidth < 600 ? 1 : 0];
+// daftar tidak melompat saat baris-baris selesai diukur. [layar lebar, layar sempit (<=640px)]
+const ESTIMATE: Record<View, [number, number]> = { kartu: [214, 190], daftar: [105, 165], tabel: [61, 144] };
+const estimate = (v: View) => ESTIMATE[v][window.innerWidth <= 640 ? 1 : 0];
 const MIN_CARD = 260;
 const GAP = 12;
 const PAGE_JUMP = 8;
@@ -127,7 +127,7 @@ export function ItemsView({ entries, view, sort, onSort }: Props) {
         <table className="ptable" {...common}>
           <PackageTableHead sort={sort} onSort={onSort} />
           <tbody ref={setBox} onKeyDown={onKeyDown}>
-            {padTop > 0 && <tr aria-hidden style={{ height: padTop }}><td colSpan={TABLE_COLS} /></tr>}
+            {padTop > 0 && <tr aria-hidden className="spacer" style={{ height: padTop }}><td colSpan={TABLE_COLS} /></tr>}
             {rows.map((v) => (
               <tr
                 key={entries[v.index].item.code}
@@ -140,7 +140,7 @@ export function ItemsView({ entries, view, sort, onSort }: Props) {
                 <PackageTableCells entry={entries[v.index]} />
               </tr>
             ))}
-            {padBottom > 0 && <tr aria-hidden style={{ height: padBottom }}><td colSpan={TABLE_COLS} /></tr>}
+            {padBottom > 0 && <tr aria-hidden className="spacer" style={{ height: padBottom }}><td colSpan={TABLE_COLS} /></tr>}
           </tbody>
         </table>
       </div>

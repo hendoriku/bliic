@@ -47,12 +47,15 @@ export function PackageTableHead({ sort, onSort }: { sort?: Sort; onSort?: (s: S
   );
 }
 
-/** Isi sel-sel satu baris (elemen <tr>-nya disediakan ItemsView agar bisa diukur dan difokuskan). */
+/**
+ * Isi sel-sel satu baris (elemen <tr>-nya disediakan ItemsView agar bisa diukur dan difokuskan).
+ * Kelas "c-*" dan atribut data-label dipakai CSS untuk menata ulang baris menjadi blok bertumpuk di layar HP.
+ */
 export function PackageTableCells({ entry: { item: i, highlight, note } }: { entry: Entry }) {
   return (
     <>
-      <td className="op">{i.operator}</td>
-      <td>
+      <td className="op c-op">{i.operator}</td>
+      <td className="c-name">
         {highlight && <span className={`tag ${highlight.tone}`}>{highlight.text}</span>}
         <div className="t-name">{cleanTitle(i.name)}</div>
         <div className="t-sub">
@@ -61,11 +64,11 @@ export function PackageTableCells({ entry: { item: i, highlight, note } }: { ent
         </div>
         {note && <div className="t-note">{note}</div>}
       </td>
-      <td className="r">{DETAILS.kuota.value(i)}</td>
-      <td className="r">{DETAILS.masa.value(i)}</td>
-      <td className="r">{DETAILS.perGbHari.value(i) ?? "—"}</td>
-      <td className="r"><strong>{rupiah(i.price)}</strong></td>
-      <td className="r">
+      <td className="r c-kuota" data-label="Kuota">{DETAILS.kuota.value(i)}</td>
+      <td className="r c-masa" data-label="Masa aktif">{DETAILS.masa.value(i)}</td>
+      <td className="r c-rate" data-label="Per GB/hari">{DETAILS.perGbHari.value(i) ?? "—"}</td>
+      <td className="r c-price"><strong>{rupiah(i.price)}</strong></td>
+      <td className="r c-buy">
         {i.available && i.buyUrl ? (
           <a className="btn sm" href={i.buyUrl} target="_blank" rel="noopener noreferrer">Beli</a>
         ) : (

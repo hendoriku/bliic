@@ -134,7 +134,44 @@ dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
 .vgrid .card { height: 100%; }
 .item { border-radius: 14px; }
 .item:focus-visible, .ptable tr:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-.ptable tr.active { background: var(--chip); }
 /* Kartu opsi tambahan "Mau unlimited?" */
 .tag.unl { background: transparent; color: var(--brand); border: 1px dashed var(--brand); }
 .card.result.unl, .row.result.unl { border: 2px dashed var(--brand); }
+
+/* ---- Tabel di layar HP: tiap baris menjadi blok bertumpuk (tanpa geser horizontal) ---- */
+@media (max-width: 640px) {
+  .table-wrap { overflow: visible; border: 0; background: none; }
+  .ptable, .ptable tbody { display: block; min-width: 0; }
+  .ptable thead { display: none; } /* pengurutan lewat dropdown "Urutkan" */
+  .ptable tbody tr:not(.spacer) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    grid-template-areas: "op op op price" "name name name name" "kuota masa rate buy";
+    gap: 6px 10px; align-items: center;
+    margin-bottom: 10px; padding: 12px 14px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  }
+  .ptable tbody tr.spacer, .ptable tbody tr.spacer td { display: block; padding: 0; border: 0; }
+  .ptable td { display: block; padding: 0; border: 0; text-align: left; white-space: normal; }
+  .ptable td.r { text-align: left; }
+  .c-op { grid-area: op; font-size: 12px; color: var(--muted); }
+  .c-price { grid-area: price; text-align: right !important; }
+  .c-price strong { font-size: 17px; }
+  .c-name { grid-area: name; }
+  .c-kuota { grid-area: kuota; } .c-masa { grid-area: masa; } .c-rate { grid-area: rate; }
+  .c-buy { grid-area: buy; text-align: right !important; }
+  .c-kuota, .c-masa, .c-rate { font-weight: 600; }
+  .c-kuota::before, .c-masa::before, .c-rate::before {
+    content: attr(data-label); display: block; font-size: 11px; font-weight: 400; color: var(--muted);
+  }
+  .ptable tbody tr:hover { background: var(--surface); }
+  .ptable tbody tr:focus-visible { outline-offset: 0; }
+}
+/* Layar sangat sempit: tombol Beli pindah ke baris sendiri agar tiga kolom detail tidak terdesak. */
+@media (max-width: 360px) {
+  .ptable tbody tr:not(.spacer) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas: "op op price" "name name name" "kuota masa rate" "buy buy buy";
+  }
+  .c-buy { justify-self: end; }
+}
