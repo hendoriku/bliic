@@ -33,9 +33,6 @@ jobs:
             && ls -l public/fonts \
             || echo "::warning::Gagal mengunduh font Captura; memakai cadangan dari server Babelii"
       - run: npm run build
-        env:
-          # Ganti ke "/" setelah memakai domain ibp.diofis.net
-          VITE_BASE: /${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
