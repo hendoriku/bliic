@@ -11,7 +11,7 @@ export interface PackageCardProps {
   /** Baris detail yang ditampilkan, berurutan. */
   rows?: DetailKey[];
   /** Pita sorotan di atas kartu (mis. "Paling Hemat Tunai"). */
-  highlight?: { text: string; tone: "main" | "alt" };
+  highlight?: { text: string; tone: "main" | "alt" | "unl" };
   /** Catatan kecil di bawah detail. */
   note?: string;
   /** Tampilkan "≈ Rp X/GB" di bawah harga. */

@@ -10,7 +10,7 @@ export const VIEW_STORAGE_KEY = "bliic:view:v2";
 export interface Entry {
   item: IbpItem;
   /** Pita sorotan (mis. "Paling Hemat Tunai"). */
-  highlight?: { text: string; tone: "main" | "alt" };
+  highlight?: { text: string; tone: "main" | "alt" | "unl" };
   /** Catatan kecil di bawah detail. */
   note?: string;
   /** Tampilkan "≈ Rp X/GB" di bawah harga. */

@@ -4,8 +4,6 @@ import type { IbpItem } from "../api/ibp.ts";
 import { durationDays, isUnlimited } from "../domain/unlimited.ts";
 
 export type Phone = "ya" | "tidak";
-/** Kuota volume biasa (ada batas GB) atau skema unlimited murni. */
-export type Scheme = "volume" | "unlimited";
 export type Hotspot = "ya" | "tidak" | "tidak_yakin";
 export type Duration = "1" | "2-3" | "7+" | "tidak_yakin";
 export type Usage = "ringan" | "sedang" | "berat" | "tidak_yakin";
@@ -16,8 +14,6 @@ export interface Answers {
   operator: string;
   /** Hafal / bersedia mengisi nomor HP? Menentukan boleh tidaknya menawarkan Paket Data. */
   phone: Phone;
-  /** Kosong = "volume". Hanya ditanyakan bila operator punya paket unlimited murni. */
-  scheme?: Scheme;
   hotspot: Hotspot;
   duration: Duration;
   usage: Usage;
@@ -69,20 +65,12 @@ export interface Result {
 
 const phoneOk = (i: IbpItem, phone: Phone) => phone === "ya" || NO_NUMBER_CATALOGUES.includes(i.catalogue);
 
-/** Jumlah paket unlimited murni yang tersedia untuk operator + jawaban nomor HP (menentukan perlu tidaknya pertanyaan skema). */
-export function countUnlimited(items: IbpItem[], operator: string, phone: Phone): number {
-  return items.filter((i) => i.available && isUnlimited(i) && i.operator === operator && phoneOk(i, phone)).length;
-}
-
-export function getRecommendations(items: IbpItem[], a: Answers): Result {
-  return a.scheme === "unlimited" ? recommendUnlimited(items, a) : recommendVolume(items, a);
-}
-
 /**
- * Skema unlimited: kuota tidak relevan, jadi "pemakaian harian" dan "prioritas" tidak ditanyakan.
- * Opsi 1 = paling hemat per hari; Opsi 2 = paling murah tunai.
+ * Opsi tambahan "Mau unlimited?": paket unlimited murni yang lolos filter yang sama (operator, nomor HP,
+ * hotspot, durasi, anggaran), dipilih yang paling hemat per hari. null bila tidak ada, sehingga kartunya
+ * tidak ditampilkan. Pemakaian harian dan prioritas sengaja tidak dipakai (tidak relevan untuk unlimited).
  */
-function recommendUnlimited(items: IbpItem[], a: Answers): Result {
+export function findUnlimitedOption(items: IbpItem[], a: Answers): WProduct | null {
   const range = DURATION_RANGE[a.duration];
   const maxBudget = MAX_BUDGET[a.budget];
   const valid = items
@@ -91,29 +79,21 @@ function recommendUnlimited(items: IbpItem[], a: Answers): Result {
     .filter((p) => {
       if (p.item.operator !== a.operator || !phoneOk(p.item, a.phone)) return false;
       if (a.hotspot === "ya" && !p.allowHotspot) return false;
-      if (range) {
-        const d = durationDays(p.item);
-        if (d === null || d < range[0] || d > range[1]) return false;
-      }
+      const d = durationDays(p.item);
+      if (d !== null && d < 1) return false; // paket per jam (mis. Warnet 1-3 jam) tidak layak disarankan
+      if (range && (d === null || d < range[0] || d > range[1])) return false;
       return p.item.price <= maxBudget;
     });
-  if (valid.length === 0) {
-    return { primary: null, secondary: null, message: "Belum ada paket unlimited yang sesuai kriteria." };
-  }
+  if (valid.length === 0) return null;
   const penalty = (p: WProduct) => (a.hotspot === "tidak_yakin" && !p.allowHotspot ? 1 : 0);
   const perDay = (p: WProduct) => {
     const d = durationDays(p.item);
     return d ? p.item.price / d : Number.POSITIVE_INFINITY;
   };
-  const byValue = [...valid].sort((x, y) => penalty(x) - penalty(y) || perDay(x) - perDay(y) || x.item.price - y.item.price);
-  const primary = byValue[0];
-  const secondary = valid
-    .filter((p) => p !== primary)
-    .sort((x, y) => penalty(x) - penalty(y) || x.item.price - y.item.price)[0] ?? null;
-  return { primary, secondary };
+  return valid.sort((x, y) => penalty(x) - penalty(y) || perDay(x) - perDay(y) || x.item.price - y.item.price)[0];
 }
 
-function recommendVolume(items: IbpItem[], a: Answers): Result {
+export function getRecommendations(items: IbpItem[], a: Answers): Result {
   const range = DURATION_RANGE[a.duration];
   const minDaily = MIN_DAILY_GB[a.usage];
   const maxBudget = MAX_BUDGET[a.budget];
@@ -194,10 +174,4 @@ export function compareBadge(primary: WProduct, secondary: WProduct, fmt: (n: nu
   if (dp < 0) return `Lebih hemat ${fmt(-dp)} dari pilihan utama`;
   if (dp > 0) return `Nambah ${fmt(dp)} untuk opsi lain`;
   return "Opsi pembanding";
-}
-
-/** Teks badge kartu kedua pada skema unlimited (opsi paling murah tunai). */
-export function compareUnlimitedBadge(primary: WProduct, secondary: WProduct, fmt: (n: number) => string): string {
-  const dp = primary.item.price - secondary.item.price;
-  return dp > 0 ? `Paling murah tunai, hemat ${fmt(dp)}` : "Alternatif unlimited";
 }
