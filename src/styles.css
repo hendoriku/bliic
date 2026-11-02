@@ -36,7 +36,7 @@ button, input, select, textarea { font-family: inherit; } /* kontrol form tidak 
 .tabs button[aria-selected="true"] { color: var(--brand); border-color: var(--brand); font-weight: 600; }
 main { padding-top: 16px; }
 .filters { display: grid; gap: 8px; grid-template-columns: 1fr; margin: 10px 0; }
-@media (min-width: 700px) { .filters { grid-template-columns: 2fr 1fr 1fr auto; align-items: center; } }
+@media (min-width: 700px) { .filters { grid-template-columns: 2fr 1fr 1fr 1fr auto; align-items: center; } }
 input, select { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); font: inherit; }
 .check { display: flex; gap: 6px; align-items: center; white-space: nowrap; } .check input { width: auto; }
 .count { color: var(--muted); margin: 4px 0 10px; }

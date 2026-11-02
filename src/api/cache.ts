@@ -9,7 +9,7 @@ import { createStore, get, set } from "idb-keyval";
 import type { IbpItem } from "./ibp.ts";
 
 /** Naikkan bila bentuk IbpItem berubah supaya cache lama dibuang. */
-export const SCHEMA_VERSION = 3;
+export const SCHEMA_VERSION = 4;
 export const CACHE_KEY = `ibp:v${SCHEMA_VERSION}`;
 export const CACHE_TTL_MS = 5 * 60 * 1000; // dianggap segar selama 5 menit
 

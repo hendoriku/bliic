@@ -4,30 +4,26 @@ import type { IbpItem } from "../api/ibp.ts";
 import { ItemsView } from "../components/ItemsView.tsx";
 import { ViewToggle } from "../components/ViewToggle.tsx";
 import type { View } from "../view.ts";
+import { matchesValidity, validityOptions } from "./facets.ts";
 import { PRESETS, presetIdOf, sortItems, type Sort } from "./sort.ts";
 
 export function Explorer({ items, view, onViewChange }: { items: IbpItem[]; view: View; onViewChange: (v: View) => void }) {
   const [op, setOp] = useState("");
   const [q, setQ] = useState("");
   const [onlyAvail, setOnlyAvail] = useState(true);
+  const [vd, setVd] = useState(""); // masa aktif terpilih ("" = semua)
   const [sort, setSort] = useState<Sort>(PRESETS[0].sort);
 
   const ops = useMemo(() => [...new Set(items.map((i) => i.operator))].sort(), [items]);
 
   const deferredQ = useDeferredValue(q); // mengetik tetap mulus walau daftar besar
-  const shown = useMemo(() => {
+  // Filter selain masa aktif; dipakai juga untuk menghitung jumlah per variasi masa aktif (faceted).
+  const base = useMemo(() => {
     const needle = deferredQ.trim().toLowerCase();
-    return sortItems(
-      items.filter(
-        (i) =>
-          (!op || i.operator === op) &&
-          (!onlyAvail || i.available) &&
-          (!needle || i.search.includes(needle)),
-      ),
-      sort,
-    );
-  }, [items, op, deferredQ, onlyAvail, sort]);
-
+    return items.filter((i) => (!op || i.operator === op) && (!onlyAvail || i.available) && (!needle || i.search.includes(needle)));
+  }, [items, op, deferredQ, onlyAvail]);
+  const vdOptions = useMemo(() => validityOptions(base, vd), [base, vd]);
+  const shown = useMemo(() => sortItems(base.filter((i) => matchesValidity(i, vd)), sort), [base, vd, sort]);
   // Referensi stabil agar baris yang sudah dirender tidak dihitung ulang (memo).
   const entries = useMemo(() => shown.map((item) => ({ item, showType: true })), [shown]);
   const presetId = presetIdOf(sort);
@@ -42,6 +38,12 @@ export function Explorer({ items, view, onViewChange }: { items: IbpItem[]; view
         <select value={op} onChange={(e) => setOp(e.target.value)} aria-label="Operator">
           <option value="">Semua operator</option>
           {ops.map((o) => <option key={o}>{o}</option>)}
+        </select>
+        <select value={vd} onChange={(e) => setVd(e.target.value)} aria-label="Masa aktif">
+          <option value="">Semua masa aktif</option>
+          {vdOptions.map((o) => (
+            <option key={o.key} value={o.key}>{o.label} ({o.count})</option>
+          ))}
         </select>
         <select
           value={presetId}

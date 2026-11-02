@@ -1,3 +1,4 @@
+import { durationDays } from "../domain/unlimited.ts";
 import { ApiError, type ApiClient } from "./client.ts";
 
 export const IBP_PATH = "/catalogue/ibp";
@@ -18,6 +19,8 @@ export interface IbpItem {
   isWorthIt: boolean;
   badges: string[];
   buyUrl: string | null;
+  /** Masa aktif dalam hari (dari API, atau dibaca dari nama paket, mis. "3 Jam" = 0,125). null bila tidak terbaca. */
+  days: number | null;
   /** Biaya per GB per hari (dari API, atau dihitung sendiri). Dihitung sekali saat data masuk. */
   unit: number | null;
   /** Teks pencarian huruf kecil (nama + kode). Dihitung sekali saat data masuk, bukan tiap ketikan. */
@@ -73,6 +76,7 @@ export function normalizeItem(raw: unknown): IbpItem | null {
     isWorthIt: o.is_worth_it === true,
     badges: Array.isArray(o.badges) ? o.badges.map(badgeLabel) : [],
     buyUrl: typeof o.buy_url === "string" ? o.buy_url : null,
+    days: durationDays({ validityDays, name }),
     unit: ratePerGbDay !== null ? ratePerGbDay : volumeGb && validityDays ? price / volumeGb / validityDays : null,
     search: `${name} ${code}`.toLowerCase(),
   };
