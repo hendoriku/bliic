@@ -5,6 +5,7 @@ import { rupiah } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
 import { BadgeChip } from "./BadgeChip.tsx";
 import { BuyButton } from "./BuyButton.tsx";
+import { TypeChip } from "./TypeChip.tsx";
 import { DETAILS } from "../presentation/details.ts";
 import { cleanTitle } from "../presentation/title.ts";
 import { defaultDir, type Sort, type SortKey } from "../explorer/sort.ts";
@@ -54,7 +55,7 @@ export function PackageTableHead({ sort, onSort }: { sort?: Sort; onSort?: (s: S
  * Isi sel-sel satu baris (elemen <tr>-nya disediakan ItemsView agar bisa diukur dan difokuskan).
  * Kelas "c-*" dan atribut data-label dipakai CSS untuk menata ulang baris menjadi blok bertumpuk di layar HP.
  */
-function PackageTableCells({ entry: { item: i, highlight, note } }: { entry: Entry }) {
+function PackageTableCells({ entry: { item: i, highlight, note, showType } }: { entry: Entry }) {
   return (
     <>
       <td className="op c-op">{i.operator}</td>
@@ -63,6 +64,7 @@ function PackageTableCells({ entry: { item: i, highlight, note } }: { entry: Ent
         <div className="t-name">{cleanTitle(i.name)}</div>
         <div className="t-sub">
           <span className="code">{i.code}</span>
+          {showType && <TypeChip catalogue={i.catalogue} />}
           {badgesFor(i).map((b) => <BadgeChip key={b.key} badge={b} as="span" />)}
         </div>
         {note && <div className="t-note">{note}</div>}

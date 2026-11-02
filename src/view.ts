@@ -15,6 +15,8 @@ export interface Entry {
   note?: string;
   /** Tampilkan "≈ Rp X/GB" di bawah harga. */
   showPricePerGb?: boolean;
+  /** Tampilkan jenis produk (Paket Data / Data Voucher / Kuota Elektrik). Dipakai di Katalog. */
+  showType?: boolean;
   /** Baris detail yang ditampilkan (khusus mode Kartu). */
   rows?: DetailKey[];
 }

@@ -29,7 +29,7 @@ export function Explorer({ items, view, onViewChange }: { items: IbpItem[]; view
   }, [items, op, deferredQ, onlyAvail, sort]);
 
   // Referensi stabil agar baris yang sudah dirender tidak dihitung ulang (memo).
-  const entries = useMemo(() => shown.map((item) => ({ item })), [shown]);
+  const entries = useMemo(() => shown.map((item) => ({ item, showType: true })), [shown]);
   const presetId = presetIdOf(sort);
 
   return (

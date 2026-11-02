@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { badgesFor } from "./badges.ts";
 import { cleanTitle } from "./title.ts";
+import { catalogueInfo } from "./catalogue.ts";
 
 test("lencana dari flag dan array badges tidak ganda (kasus nyata dari API)", () => {
   const b = badgesFor({ isSmartPick: true, isWorthIt: true, badges: ["smart_pick", "worth_it"] });
@@ -24,4 +25,15 @@ test("tanpa lencana -> daftar kosong", () => {
 
 test("cleanTitle merapikan spasi dan kurung", () => {
   assert.equal(cleanTitle("  Axis Data  Paket ( 1GB ) , Jam "), "Axis Data Paket (1GB), Jam");
+});
+
+test("jenis produk: label Indonesia untuk tiga katalog dikenal", () => {
+  assert.deepEqual(
+    ["data-package", "data-voucher", "electric-quota"].map((k) => catalogueInfo(k).label),
+    ["Paket Data", "Data Voucher", "Kuota Elektrik"],
+  );
+});
+
+test("jenis produk tak dikenal tetap tampil dengan label rapi dan tanpa ikon", () => {
+  assert.deepEqual(catalogueInfo("roaming-pass"), { key: "roaming-pass", label: "Roaming Pass", icon: null });
 });

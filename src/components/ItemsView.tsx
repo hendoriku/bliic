@@ -171,7 +171,7 @@ export function ItemsView({ entries, view, sort, onSort }: Props) {
                     tabIndex={first + j === active ? 0 : -1}
                     className={first + j === active ? "item active" : "item"}
                   >
-                    <PackageCard item={e.item} rows={e.rows} highlight={e.highlight} note={e.note} showPricePerGb={e.showPricePerGb} />
+                    <PackageCard item={e.item} rows={e.rows} highlight={e.highlight} note={e.note} showPricePerGb={e.showPricePerGb} showType={e.showType} />
                   </div>
                 ))}
               </div>

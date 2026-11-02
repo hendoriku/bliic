@@ -6,6 +6,7 @@ import { rupiah, rupiahPrecise } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
 import { BadgeChip } from "./BadgeChip.tsx";
 import { BuyButton } from "./BuyButton.tsx";
+import { TypeChip } from "./TypeChip.tsx";
 import { DETAILS, pricePerGb, type DetailKey } from "../presentation/details.ts";
 import { cleanTitle } from "../presentation/title.ts";
 
@@ -19,11 +20,13 @@ export interface PackageCardProps {
   note?: string;
   /** Tampilkan "≈ Rp X/GB" di bawah harga. */
   showPricePerGb?: boolean;
+  /** Tampilkan jenis produk di samping operator. */
+  showType?: boolean;
 }
 
 const DEFAULT_ROWS: DetailKey[] = ["kuota", "masa", "perGbHari"];
 
-export const PackageCard = memo(function PackageCard({ item, rows = DEFAULT_ROWS, highlight, note, showPricePerGb = false }: PackageCardProps) {
+export const PackageCard = memo(function PackageCard({ item, rows = DEFAULT_ROWS, highlight, note, showPricePerGb = false, showType = false }: PackageCardProps) {
   const badges = badgesFor(item);
   const perGb = showPricePerGb ? pricePerGb(item) : null;
   const details = rows
@@ -35,6 +38,7 @@ export const PackageCard = memo(function PackageCard({ item, rows = DEFAULT_ROWS
       {highlight && <span className={`tag ${highlight.tone}`}>{highlight.text}</span>}
       <div className="meta">
         <span className="op">{item.operator}</span>
+        {showType && <TypeChip catalogue={item.catalogue} />}
       </div>
       <h3>{cleanTitle(item.name)}</h3>
       {badges.length > 0 && (

@@ -4,6 +4,7 @@ import { rupiahPrecise, rupiah } from "../format.ts";
 import { badgesFor } from "../presentation/badges.ts";
 import { BadgeChip } from "./BadgeChip.tsx";
 import { BuyButton } from "./BuyButton.tsx";
+import { TypeChip } from "./TypeChip.tsx";
 import { DETAILS, pricePerGb, type DetailKey } from "../presentation/details.ts";
 import type { Entry } from "../view.ts";
 import { cleanTitle } from "../presentation/title.ts";
@@ -21,6 +22,7 @@ export const PackageRow = memo(function PackageRow({ entry }: { entry: Entry }) 
         <div className="row-top">
           <span className="op">{item.operator}</span>
           <span className="code">{item.code}</span>
+          {entry.showType && <TypeChip catalogue={item.catalogue} />}
         </div>
         <h3>{cleanTitle(item.name)}</h3>
         {badges.length > 0 && (

@@ -142,6 +142,7 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
     entries.push({
       item: r.primary.item,
       rows: ["kuota", "masa"],
+      showType: true,
       showPricePerGb: true,
       highlight: { text: a.priority === "cheapest" ? "Paling Hemat Tunai" : "Paling Pas Dengan Kebutuhanmu", tone: "main" },
     });
@@ -149,6 +150,7 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
       entries.push({
         item: r.secondary.item,
         rows: ["kuota", "masa"],
+      showType: true,
         showPricePerGb: true,
         highlight: { text: compareBadge(r.primary, r.secondary, rupiah), tone: "alt" },
       });
@@ -159,6 +161,7 @@ export function Wizard({ items, view, onViewChange }: { items: IbpItem[]; view: 
     entries.push({
       item: unlimited.item,
       rows: ["kuota", "masa"],
+      showType: true,
       note: d ? `≈ ${rupiah(unlimited.item.price / d)} per hari` : undefined,
       highlight: { text: "Mau unlimited? Opsi untukmu", tone: "unl" },
     });

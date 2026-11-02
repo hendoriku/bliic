@@ -206,3 +206,15 @@ dt { font-size: 11px; color: var(--muted); } dd { margin: 0; font-weight: 600; }
 
 .foot { margin-top: 32px; text-align: center; }
 .foot p { margin: 0; font-size: 12px; color: var(--muted); }
+
+/* ---- Penanda jenis produk (Katalog) ---- */
+.type { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; line-height: 1.4; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+/* Warna jenis sengaja berbeda dari lencana Smart Pick (biru) dan Worth It (hijau) agar tidak tertukar. */
+:root { --type-package: #5b4bd6; --type-voucher: #c0267a; --type-quota: #b54708; }
+@media (prefers-color-scheme: dark) { :root { --type-package: #a79bff; --type-voucher: #ff8cc0; --type-quota: #fbbf24; } }
+.type.t-data-package { color: var(--type-package); }
+.type.t-data-voucher { color: var(--type-voucher); }
+.type.t-electric-quota { color: var(--type-quota); }
+.meta { align-items: center; gap: 8px; }
+.row-top { align-items: center; flex-wrap: wrap; }
+.t-sub .type { flex: none; }

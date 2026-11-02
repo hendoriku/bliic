@@ -158,7 +158,7 @@ function Recommend({ items, view, onViewChange }: { items: IbpItem[]; view: View
       {results.length === 0 ? (
         <p className="state">Belum ada paket yang cocok. Coba longgarkan budget, kuota, atau masa aktif.</p>
       ) : (
-        <ItemsView entries={results.map((r) => ({ item: r.item, note: r.reason }))} view={view} />
+        <ItemsView entries={results.map((r) => ({ item: r.item, note: r.reason, showType: true }))} view={view} />
       )}
     </section>
   );
