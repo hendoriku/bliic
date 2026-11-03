@@ -6,6 +6,7 @@ import { fetchIbpConditional, type IbpItem } from "./api/ibp.ts";
 import { ItemsView } from "./components/ItemsView.tsx";
 import { ViewToggle } from "./components/ViewToggle.tsx";
 import { usePersistentState } from "./hooks.ts";
+import { parseTab, tabHash, type Tab } from "./tabs.ts";
 import { VIEWS, VIEW_STORAGE_KEY, type View } from "./view.ts";
 import { recommend, unitCost, type Need } from "./recommend.ts";
 import { Explorer } from "./explorer/Explorer.tsx";
@@ -20,11 +21,21 @@ type Load =
   | { kind: "loading" }
   | { kind: "ok"; items: IbpItem[]; at: number; refreshing: boolean; notice?: string }
   | { kind: "error"; message: string };
-type Tab = "katalog" | "rekomendasi" | "bantu";
 
 export function App() {
   const [load, setLoad] = useState<Load>({ kind: "loading" });
-  const [tab, setTab] = useState<Tab>("bantu");
+  // Tab mengikuti hash URL (#katalog, #rekomendasi, #bantu) sehingga bisa dibagikan sebagai tautan langsung.
+  const [tab, setTabState] = useState<Tab>(() => parseTab(window.location.hash));
+  useEffect(() => {
+    const onHash = () => setTabState(parseTab(window.location.hash));
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+  const setTab = (t: Tab) => {
+    setTabState(t);
+    // replaceState: berpindah tab tidak menambah riwayat (tombol Back tidak berputar antar tab).
+    window.history.replaceState(null, "", tabHash(t));
+  };
   // Pilihan tampilan dipakai bersama oleh semua tab dan diingat antar kunjungan.
   const [view, setView] = usePersistentState<View>(VIEW_STORAGE_KEY, "tabel", VIEWS);
 

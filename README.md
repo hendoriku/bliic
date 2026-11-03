@@ -13,6 +13,19 @@ npm test
 
 Dideploy otomatis ke GitHub Pages oleh `.github/workflows/pages.yml` (domain: https://bliic.diofis.net).
 
+## Tautan langsung ke tab
+
+Tab aktif mengikuti bagian `#` pada URL, jadi bisa dibagikan sebagai tautan:
+
+| Tautan | Membuka |
+|---|---|
+| `https://bliic.diofis.net/` | Bantu Pilih (bawaan) |
+| `https://bliic.diofis.net/#katalog` | Katalog |
+| `https://bliic.diofis.net/#rekomendasi` | Rekomendasi |
+| `https://bliic.diofis.net/#bantu` | Bantu Pilih |
+
+Nilai yang tidak dikenal jatuh ke Bantu Pilih. Aplikasi yang dipasang di layar HP (PWA) juga punya pintasan tekan-lama ke ketiga tab.
+
 ## Android (APK)
 
 Di GitHub: tab **Actions** → **Build Android APK** → **Run workflow**, lalu unduh artifact `bliic-debug-apk` (berisi `app-debug.apk`).
