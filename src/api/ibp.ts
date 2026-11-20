@@ -1,5 +1,5 @@
 import { durationDays } from "../domain/unlimited.ts";
-import { ApiError, type ApiClient } from "./client.ts";
+import { ApiError, errorFromResponse, type ApiClient } from "./client.ts";
 
 export const IBP_PATH = "/catalogue/ibp";
 
@@ -173,10 +173,8 @@ export type ConditionalResult =
 export async function fetchIbpConditional(client: ApiClient, etag: string | null): Promise<ConditionalResult> {
   const first = await client.getRaw(IBP_PATH, undefined, etag ? { "If-None-Match": etag } : undefined);
   if (first.status === 304) return { status: "not-modified" };
-  if (first.status < 200 || first.status >= 300) {
-    throw new ApiError(`HTTP ${first.status} untuk ${IBP_PATH}`, first.status, first.text.slice(0, 500));
-  }
-  if (first.json === null) throw new ApiError(`Respons ${IBP_PATH} bukan JSON`, first.status, first.text.slice(0, 500));
+  if (first.status < 200 || first.status >= 300) throw errorFromResponse(IBP_PATH, first);
+  if (first.json === null) throw new ApiError(`Respons ${IBP_PATH} bukan JSON`, first.status, first.text.slice(0, 500), "parse");
   const root = obj(first.json);
   const paged = nextUrl(root) !== null || (lastPage(root) ?? 1) > currentPage(root);
   if (paged) return { status: "ok", items: parseIbp(await fetchAllPages(client)).items, etag: null };

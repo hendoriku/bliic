@@ -1,6 +1,6 @@
 import { Calculator, Library, RefreshCw, WandSparkles } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { ApiClient } from "./api/client.ts";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ApiClient, ApiError } from "./api/client.ts";
 import { isFresh, readCache, writeCache } from "./api/cache.ts";
 import { fetchIbpConditional, type IbpItem } from "./api/ibp.ts";
 import { ItemsView } from "./components/ItemsView.tsx";
@@ -14,8 +14,29 @@ import { Wizard } from "./Wizard.tsx";
 
 const client = new ApiClient({
   baseUrl: import.meta.env.VITE_API_BASE_URL ?? "https://babelii.diofis.net/public-api/v1",
-  retries: 1,
+  // Respons katalog besar dan kadang lambat (server bisa "bangun" 3-10 detik), jadi waktu tunggu dan percobaan ulang dilonggarkan.
+  timeoutMs: 20_000,
+  retries: 2,
 });
+
+/** Alasan kegagalan dalam bahasa yang bisa dipahami pengguna. */
+export function describeError(err: unknown): string {
+  if (err instanceof ApiError) {
+    switch (err.kind) {
+      case "rate-limit":
+        return "Server sedang membatasi permintaan, coba lagi sebentar lagi";
+      case "timeout":
+        return "Server lambat merespons";
+      case "network":
+        return navigator.onLine === false ? "Tidak ada koneksi internet" : "Tidak bisa menjangkau server";
+      case "server":
+        return `Server sedang bermasalah (HTTP ${err.status ?? "5xx"})`;
+      default:
+        return `Respons tidak terduga${err.status ? ` (HTTP ${err.status})` : ""}`;
+    }
+  }
+  return "Terjadi kesalahan tak terduga";
+}
 
 type Load =
   | { kind: "loading" }
@@ -64,13 +85,36 @@ export function App() {
     } catch (err) {
       setLoad((cur) =>
         cur.kind === "ok"
-          ? { ...cur, refreshing: false, notice: "Gagal menyegarkan, menampilkan data tersimpan." }
-          : { kind: "error", message: String(err) },
+          ? { ...cur, refreshing: false, notice: `Gagal menyegarkan: ${describeError(err)}. Menampilkan data tersimpan.` }
+          : { kind: "error", message: describeError(err) },
       );
     }
   };
   useEffect(() => {
     void reload();
+  }, []);
+
+  // Penyegaran otomatis saat koneksi kembali atau tab dibuka lagi, hanya bila data basi atau penyegaran terakhir gagal.
+  // Jeda minimal 30 detik antar percobaan agar tidak membebani server yang membatasi permintaan.
+  const loadRef = useRef(load);
+  loadRef.current = load;
+  const lastAttempt = useRef(Date.now());
+  useEffect(() => {
+    const refreshIfNeeded = () => {
+      const cur = loadRef.current;
+      if (cur.kind === "loading" || (cur.kind === "ok" && cur.refreshing)) return;
+      const needs = cur.kind === "error" || (cur.kind === "ok" && (!!cur.notice || !isFresh({ at: cur.at })));
+      if (!needs || Date.now() - lastAttempt.current < 30_000) return;
+      lastAttempt.current = Date.now();
+      void reload();
+    };
+    const onVisible = () => document.visibilityState === "visible" && refreshIfNeeded();
+    window.addEventListener("online", refreshIfNeeded);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      window.removeEventListener("online", refreshIfNeeded);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, []);
 
   return (

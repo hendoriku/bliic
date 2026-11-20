@@ -6,18 +6,28 @@ export interface ClientOptions {
   token?: string;
   timeoutMs?: number;
   retries?: number;
+  /** Jeda dasar antar percobaan ulang (ms); berlipat dua tiap percobaan. Diperkecil di test. */
+  backoffMs?: number;
   fetchImpl?: typeof fetch;
 }
+
+/** Jenis kegagalan, agar tampilan bisa menjelaskan sebabnya (bukan satu pesan generik). */
+export type ApiErrorKind = "network" | "timeout" | "rate-limit" | "server" | "http" | "parse";
 
 export class ApiError extends Error {
   readonly status?: number;
   readonly body?: string;
+  readonly kind: ApiErrorKind;
+  /** Dari header Retry-After (bila ada), dalam milidetik. */
+  readonly retryAfterMs?: number;
 
-  constructor(message: string, status?: number, body?: string) {
+  constructor(message: string, status?: number, body?: string, kind?: ApiErrorKind, retryAfterMs?: number) {
     super(message);
     this.name = "ApiError";
     this.status = status;
     this.body = body;
+    this.retryAfterMs = retryAfterMs;
+    this.kind = kind ?? (status === 429 ? "rate-limit" : status !== undefined && status >= 500 ? "server" : "http");
   }
 }
 
@@ -30,11 +40,28 @@ export interface RawResponse {
   json: unknown;
 }
 
+/** Retry-After berupa detik atau tanggal HTTP -> milidetik; null bila tidak ada/tidak terbaca. */
+export function parseRetryAfter(value: string | null | undefined, now = Date.now()): number | null {
+  if (!value) return null;
+  const secs = Number(value);
+  if (Number.isFinite(secs)) return Math.max(0, secs * 1000);
+  const at = Date.parse(value);
+  return Number.isNaN(at) ? null : Math.max(0, at - now);
+}
+
+/** Error yang sesuai untuk respons non-2xx. */
+export function errorFromResponse(path: string, r: RawResponse): ApiError {
+  return new ApiError(`HTTP ${r.status} untuk ${path}`, r.status, r.text.slice(0, 500), undefined, parseRetryAfter(r.headers["retry-after"]) ?? undefined);
+}
+
+const MAX_WAIT_MS = 8_000; // batas menunggu Retry-After di dalam satu permintaan
+
 export class ApiClient {
   private readonly baseUrl: string;
   private readonly token?: string;
   private readonly timeoutMs: number;
   private readonly retries: number;
+  private readonly backoffMs: number;
   private readonly fetchImpl: typeof fetch;
 
   constructor(opts: ClientOptions) {
@@ -42,6 +69,7 @@ export class ApiClient {
     this.token = opts.token || undefined;
     this.timeoutMs = opts.timeoutMs ?? 10_000;
     this.retries = opts.retries ?? 2;
+    this.backoffMs = opts.backoffMs ?? 500;
     this.fetchImpl = opts.fetchImpl ?? ((input, init) => fetch(input, init));
   }
 
@@ -53,7 +81,11 @@ export class ApiClient {
     return url;
   }
 
-  /** GET tanpa interpretasi skema: berguna untuk menyelidiki respons asli. */
+  /**
+   * GET tanpa interpretasi skema. Mencoba ulang untuk kegagalan jaringan, timeout, 5xx, dan 429
+   * (menghormati Retry-After, maksimal 8 detik). Bila setelah semua percobaan masih 5xx/429, responsnya
+   * dikembalikan apa adanya agar pemanggil bisa membuat error yang tepat.
+   */
   async getRaw(
     path: string,
     query?: Record<string, string | number>,
@@ -64,6 +96,7 @@ export class ApiClient {
 
     let lastError: unknown;
     for (let attempt = 0; attempt <= this.retries; attempt++) {
+      const backoff = this.backoffMs * 2 ** attempt;
       try {
         const res = await this.fetchImpl(url, {
           method: "GET",
@@ -75,9 +108,9 @@ export class ApiClient {
           signal: AbortSignal.timeout(this.timeoutMs),
         });
         const text = await res.text();
-        // 5xx dan 429 layak dicoba ulang; 4xx lain tidak.
         if ((res.status >= 500 || res.status === 429) && attempt < this.retries) {
-          await sleep(300 * 2 ** attempt);
+          const ra = res.status === 429 ? parseRetryAfter(res.headers.get("retry-after")) : null;
+          await sleep(Math.min(ra ?? backoff, MAX_WAIT_MS));
           continue;
         }
         let json: unknown = null;
@@ -96,19 +129,23 @@ export class ApiClient {
         };
       } catch (err) {
         lastError = err;
-        if (attempt < this.retries) await sleep(300 * 2 ** attempt);
+        if (attempt < this.retries) await sleep(backoff);
       }
     }
-    throw new ApiError(`Gagal menghubungi ${url}: ${String(lastError)}`);
+    const timedOut = lastError instanceof Error && (lastError.name === "TimeoutError" || lastError.name === "AbortError");
+    throw new ApiError(
+      `${timedOut ? "Waktu habis" : "Gagal menghubungi"} ${url}: ${String(lastError)}`,
+      undefined,
+      undefined,
+      timedOut ? "timeout" : "network",
+    );
   }
 
   /** GET yang mewajibkan 2xx dan body JSON. */
   async getJson(path: string, query?: Record<string, string | number>): Promise<unknown> {
     const r = await this.getRaw(path, query);
-    if (r.status < 200 || r.status >= 300) {
-      throw new ApiError(`HTTP ${r.status} untuk ${path}`, r.status, r.text.slice(0, 500));
-    }
-    if (r.json === null) throw new ApiError(`Respons ${path} bukan JSON`, r.status, r.text.slice(0, 500));
+    if (r.status < 200 || r.status >= 300) throw errorFromResponse(path, r);
+    if (r.json === null) throw new ApiError(`Respons ${path} bukan JSON`, r.status, r.text.slice(0, 500), "parse");
     return r.json;
   }
 }
