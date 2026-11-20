@@ -5,6 +5,7 @@ import { ItemsView } from "./components/ItemsView.tsx";
 import { ViewToggle } from "./components/ViewToggle.tsx";
 import { durationDays } from "./domain/unlimited.ts";
 import { rupiah } from "./format.ts";
+import { niceOperator } from "./presentation/operator.ts";
 import type { Entry, View } from "./view.ts";
 import { compareBadge, findUnlimitedOption, getRecommendations, type Answers } from "./wizard/engine.ts";
 
@@ -14,8 +15,6 @@ interface Step { key: Key; question: string; options: Option[] }
 
 const UNSURE: Option = { value: "tidak_yakin", label: "Tidak yakin", unsure: true };
 
-/** "AXIS" -> "Axis"; nama yang sudah campuran huruf ("by.U", "Indosat") dan singkatan pendek ("XL") dibiarkan. */
-const niceOperator = (o: string) => (o.length > 3 && o === o.toUpperCase() ? o[0] + o.slice(1).toLowerCase() : o);
 
 function buildSteps(operators: string[]): Step[] {
   return [

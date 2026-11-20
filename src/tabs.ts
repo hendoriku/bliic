@@ -1,7 +1,7 @@
 // Tautan langsung ke tab lewat bagian "#" pada URL, mis. https://bliic.diofis.net/#katalog
 // Hash dipilih (bukan path) karena situs statis di GitHub Pages tidak punya routing sisi server,
 // dan hash tidak memuat ulang halaman, juga aman di aplikasi Android (Capacitor).
-export const TABS = ["katalog", "rekomendasi", "bantu"] as const;
+export const TABS = ["katalog", "rekomendasi", "bantu", "operator"] as const;
 export type Tab = (typeof TABS)[number];
 export const DEFAULT_TAB: Tab = "bantu";
 

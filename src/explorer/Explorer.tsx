@@ -7,8 +7,8 @@ import type { View } from "../view.ts";
 import { matchesValidity, validityOptions } from "./facets.ts";
 import { PRESETS, presetIdOf, sortItems, type Sort } from "./sort.ts";
 
-export function Explorer({ items, view, onViewChange }: { items: IbpItem[]; view: View; onViewChange: (v: View) => void }) {
-  const [op, setOp] = useState("");
+export function Explorer({ items, view, onViewChange, initialOperator = "" }: { items: IbpItem[]; view: View; onViewChange: (v: View) => void; initialOperator?: string }) {
+  const [op, setOp] = useState(initialOperator);
   const [q, setQ] = useState("");
   const [onlyAvail, setOnlyAvail] = useState(true);
   const [vd, setVd] = useState(""); // masa aktif terpilih ("" = semua)

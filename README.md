@@ -23,6 +23,7 @@ Tab aktif mengikuti bagian `#` pada URL, jadi bisa dibagikan sebagai tautan:
 | `https://bliic.diofis.net/#katalog` | Katalog |
 | `https://bliic.diofis.net/#rekomendasi` | Rekomendasi |
 | `https://bliic.diofis.net/#bantu` | Bantu Pilih |
+| `https://bliic.diofis.net/#operator` | Operator (pemilih operator) |
 
 Nilai yang tidak dikenal jatuh ke Bantu Pilih. Aplikasi yang dipasang di layar HP (PWA) juga punya pintasan tekan-lama ke ketiga tab.
 
